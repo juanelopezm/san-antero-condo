@@ -1,0 +1,161 @@
+body {
+    font-family: 'Trebuchet MS', sans-serif;
+    margin: 0;
+    padding: 0;
+    /* Caribbean background image fetched from Unsplash */
+    background-image: url('images/beach-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* Warm Caribbean color palette */
+    background-color: #e0f7fa;
+    color: #004d40;
+}
+
+header {
+    background: linear-gradient(rgba(0, 121, 107, 0.7), rgba(0, 77, 64, 0.8)), url('images/beach-header.jpg');
+    color: #ffffff;
+    padding: 60px 0;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 4px 12px rgba(0, 77, 64, 0.2);
+}
+
+h1 {
+    margin: 0;
+    font-size: 3em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.apartment, .amenities, .location {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #00796b;
+    border-radius: 12px;
+    margin: 30px 0;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 77, 64, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.apartment:hover, .amenities:hover, .location:hover {
+    transform: translateY(-5px);
+}
+
+.apartment img, .location img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 77, 64, 0.2);
+    transition: all 0.3s ease;
+    height: 300px;
+    object-fit: cover;
+}
+
+.apartment img:hover, .location img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 77, 64, 0.3);
+}
+
+.apartment h3, .amenities h2, .location h2 {
+    font-size: 2em;
+    margin: 15px 0;
+    color: #00796b;
+    text-shadow: 1px 1px 2px rgba(0, 77, 64, 0.1);
+}
+
+.apartment p, .location p {
+    line-height: 1.8;
+    font-size: 1.1em;
+}
+
+footer {
+    text-align: center;
+    padding: 30px 0;
+    background: linear-gradient(to right, #00796b, #004d40);
+    color: #ffffff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -4px 12px rgba(0, 77, 64, 0.2);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background: linear-gradient(45deg, #00796b, #004d40);
+    color: #ffffff;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 77, 64, 0.2);
+}
+
+ul li:hover {
+    background: linear-gradient(45deg, #004d40, #00796b);
+    transform: translateX(10px);
+}
+
+.language-switcher {
+    text-align: right;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    margin: 10px;
+    box-shadow: 0 2px 8px rgba(0, 77, 64, 0.1);
+}
+
+.language-switcher a {
+    color: #00796b;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.language-switcher a:hover {
+    color: #004d40;
+}
+
+.gallery {
+    padding: 30px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    margin: 30px 0;
+    box-shadow: 0 4px 15px rgba(0, 77, 64, 0.15);
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 20px;
+}
+
+.gallery-container img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 77, 64, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-container img:hover {
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: 0 8px 20px rgba(0, 77, 64, 0.3);
+    z-index: 1;
+}
