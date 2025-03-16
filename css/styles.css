@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     /* Caribbean background image fetched from Unsplash */
-    background-image: url('images/beach-background.jpg');
+    background-image: url('../images/beach-background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -13,7 +13,7 @@ body {
 }
 
 header {
-    background: linear-gradient(rgba(0, 121, 107, 0.7), rgba(0, 77, 64, 0.8)), url('images/beach-header.jpg');
+    background: linear-gradient(rgba(0, 121, 107, 0.7), rgba(0, 77, 64, 0.8)), url('../images/beach-header.jpg');
     color: #ffffff;
     padding: 60px 0;
     text-align: center;
