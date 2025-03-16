@@ -10,18 +10,17 @@ A beautiful website showcasing luxury condo rentals in San Antero, Colombia. Bui
 - Interactive elements
 
 ## Visit the Website
-Visit [https://juanestebanlopez.github.io/san-antero-condo/](https://juanestebanlopez.github.io/san-antero-condo/) to view the live site.
+Visit [https://juanelopezm.github.io/san-antero-condo/](https://juanelopezm.github.io/san-antero-condo/) to view the live site.
 
 ## Project Structure
-
 ```
-san-antero-condo
-├── src
-│   ├── css
+san-antero-condo/
+├── src/
+│   ├── css/
 │   │   └── styles.css        # Styles for the web page
-│   ├── js
+│   ├── js/
 │   │   └── scripts.js        # JavaScript for interactive features
-│   ├── images                # Directory for apartment images
+│   ├── images/                # Directory for apartment images
 │   └── index.html            # Main HTML file
 ├── .gitignore                # Files to ignore in version control
 └── README.md                 # Project documentation
