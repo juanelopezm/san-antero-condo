@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Antero Condo Rentals - Your Caribbean Paradise</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to San Antero Condo Rentals</h1>
+        <p>Your perfect Caribbean getaway in beautiful San Antero, Colombia</p>
+    </header>
+    <div class="language-switcher">
+        <a href="#" onclick="switchLanguage('en')"><i class="fas fa-globe"></i> English</a> | 
+        <a href="#" onclick="switchLanguage('es')"><i class="fas fa-globe"></i> Español</a>
+    </div>
+    <main class="container">
+        <section id="apartments">
+            <h2><i class="fas fa-home"></i> Available Apartments</h2>
+            <div class="apartment">
+                <img src="images/beach-view-suite.jpg" alt="Ocean View Suite with Beach Access">
+                <h3>Ocean View Suite</h3>
+                <p><i class="fas fa-bed"></i> 2 Bedrooms, 1 Bathroom</p>
+                <p><i class="fas fa-dollar-sign"></i> Price: $100 per night</p>
+                <p><i class="fas fa-umbrella-beach"></i> Beachfront Access</p>
+            </div>
+            <div class="apartment">
+                <img src="images/luxury-villa.jpg" alt="Luxury Beach Villa with Pool">
+                <h3>Luxury Beach Villa</h3>
+                <p><i class="fas fa-bed"></i> 3 Bedrooms, 2 Bathrooms</p>
+                <p><i class="fas fa-dollar-sign"></i> Price: $150 per night</p>
+                <p><i class="fas fa-umbrella-beach"></i> Private Beach Access</p>
+            </div>
+        </section>
+        <section id="amenities">
+            <h2><i class="fas fa-star"></i> Amenities</h2>
+            <ul>
+                <li><i class="fas fa-swimming-pool"></i> Infinity Swimming Pool</li>
+                <li><i class="fas fa-wifi"></i> High-Speed Wi-Fi</li>
+                <li><i class="fas fa-shield-alt"></i> 24/7 Security</li>
+                <li><i class="fas fa-parking"></i> Free Parking Space</li>
+                <li><i class="fas fa-umbrella-beach"></i> Beach Equipment</li>
+                <li><i class="fas fa-concierge-bell"></i> Concierge Service</li>
+            </ul>
+        </section>
+        <section id="location">
+            <h2><i class="fas fa-map-marker-alt"></i> Location</h2>
+            <p>Located in the heart of San Antero, just steps away from pristine Caribbean beaches and local attractions. Experience the perfect blend of luxury and tropical paradise.</p>
+            <img src="images/beach-location.jpg" alt="Beach Location Map">
+        </section>
+        <section class="gallery">
+            <h2><i class="fas fa-images"></i> Gallery</h2>
+            <div class="gallery-container">
+                <img src="images/beach-sunset.jpg" alt="Caribbean Sunset">
+                <img src="images/palm-beach.jpg" alt="Palm-lined Beach">
+                <img src="images/beach-pool.jpg" alt="Beachfront Pool">
+                <img src="images/tropical-garden.jpg" alt="Tropical Garden">
+                <img src="images/beach-restaurant.jpg" alt="Beach Restaurant">
+                <img src="images/beach-activities.jpg" alt="Beach Activities">
+            </div>
+        </section>
+        <section class="apartment">
+            <h3><i class="fas fa-heart"></i> Cozy Condo</h3>
+            <img src="images/cozy-beach-condo.jpg" alt="Cozy Beach Condo">
+            <p>Beautiful condo with modern amenities, located in the heart of San Antero. Enjoy a spacious living area and breathtaking Caribbean views. Perfect for your tropical getaway!</p>
+        </section>
+    </main>
+    <footer>
+        <p><i class="fas fa-copyright"></i> 2024 San Antero Condo Rentals. All rights reserved.</p>
+        <p><i class="fas fa-phone"></i> Contact: +57 (123) 456-7890</p>
+        <p><i class="fas fa-envelope"></i> Email: info@sananterocondo.com</p>
+    </footer>
+    <script src="js/scripts.js"></script>
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'es') {
+                document.querySelector('h1').textContent = 'Bienvenido a Alquileres de Condos en San Antero';
+                document.querySelector('header p').textContent = 'Tu escapada perfecta en el hermoso San Antero, Colombia.';
+                document.querySelector('#apartments h2').textContent = 'Apartamentos Disponibles';
+                document.querySelector('#amenities h2').textContent = 'Servicios';
+                document.querySelector('#location h2').textContent = 'Ubicación';
+                document.querySelector('#location p').textContent = 'Ubicado en el corazón de San Antero, cerca de la playa y atracciones locales.';
+                document.querySelectorAll('.apartment h3')[0].textContent = 'Apartamento 1';
+                document.querySelectorAll('.apartment p')[0].textContent = '2 Habitaciones, 1 Baño';
+                document.querySelectorAll('.apartment p')[1].textContent = 'Precio: $100 por noche';
+                document.querySelectorAll('.apartment h3')[1].textContent = 'Apartamento 2';
+                document.querySelectorAll('.apartment p')[2].textContent = '3 Habitaciones, 2 Baños';
+                document.querySelectorAll('.apartment p')[3].textContent = 'Precio: $150 por noche';
+                document.querySelectorAll('ul li')[0].textContent = 'Piscina';
+                document.querySelectorAll('ul li')[1].textContent = 'Wi-Fi Gratis';
+                document.querySelectorAll('ul li')[2].textContent = 'Seguridad 24/7';
+                document.querySelectorAll('ul li')[3].textContent = 'Espacio de Estacionamiento';
+            } else {
+                document.querySelector('h1').textContent = 'Welcome to San Antero Condo Rentals';
+                document.querySelector('header p').textContent = 'Your perfect getaway in beautiful San Antero, Colombia.';
+                document.querySelector('#apartments h2').textContent = 'Available Apartments';
+                document.querySelector('#amenities h2').textContent = 'Amenities';
+                document.querySelector('#location h2').textContent = 'Location';
+                document.querySelector('#location p').textContent = 'Located in the heart of San Antero, close to the beach and local attractions.';
+                document.querySelectorAll('.apartment h3')[0].textContent = 'Apartment 1';
+                document.querySelectorAll('.apartment p')[0].textContent = '2 Bedrooms, 1 Bathroom';
+                document.querySelectorAll('.apartment p')[1].textContent = 'Price: $100 per night';
+                document.querySelectorAll('.apartment h3')[1].textContent = 'Apartment 2';
+                document.querySelectorAll('.apartment p')[2].textContent = '3 Bedrooms, 2 Bathrooms';
+                document.querySelectorAll('.apartment p')[3].textContent = 'Price: $150 per night';
+                document.querySelectorAll('ul li')[0].textContent = 'Swimming Pool';
+                document.querySelectorAll('ul li')[1].textContent = 'Free Wi-Fi';
+                document.querySelectorAll('ul li')[2].textContent = '24/7 Security';
+                document.querySelectorAll('ul li')[3].textContent = 'Parking Space';
+            }
+        }
+    </script>
+</body>
+</html>
