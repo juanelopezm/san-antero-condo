@@ -372,7 +372,8 @@ h2 {
 #apartments {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    gap: 4rem;
+    padding: 2rem 0;
 }
 
 .apartment {
@@ -412,8 +413,9 @@ h2 {
 }
 
 .apartment-type {
-    margin-bottom: 3rem;
-    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+    padding: 3rem;
     background: white;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
