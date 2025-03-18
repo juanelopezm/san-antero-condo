@@ -1270,4 +1270,14 @@ section h2 {
     justify-content: center;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 50%;
+}
+
+#availability-section {
+    text-align: center;
+    margin: 0 auto;
+}
+
+#availability-section .cta-button {
+    display: inline-block;
+    margin-top: 10px;
 } 
