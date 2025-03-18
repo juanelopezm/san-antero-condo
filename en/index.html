@@ -3,12 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cabañas Mi Pequeño Paraíso - Vacation apartments in San Antero, Córdoba. Enjoy our 6 modern cabins with capacity for 6-12 people, jacuzzi, pool, and beautiful views of Cispatá Bay.">
-    <meta name="keywords" content="cabins san antero, apartments san antero, lodging cordoba, caribbean colombia vacation, playa blanca san antero">
-    <title>Cabañas Mi Pequeño Paraíso - Your Paradise in San Antero</title>
+    <meta name="description" content="Mi Pequeño Paraíso Cottages - Vacation apartments in San Antero, Córdoba. Enjoy our 6 modern cottages with capacity for 6-12 people, jacuzzi, pool and beautiful views of Cispatá Bay.">
+    <meta name="keywords" content="san antero cottages, san antero apartments, cordoba accommodation, caribbean colombia vacation, san antero white beach">
+    <title>Mi Pequeño Paraíso Cottages - Your Paradise in San Antero</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        /* Popup Gallery Styles */
+        .popup-gallery {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .popup-gallery.active {
+            display: block !important;
+        }
+
+        .popup-gallery-content {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: transparent;
+            padding: 2rem;
+        }
+
+        .popup-gallery-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 10000;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup-gallery-close:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .popup-gallery h3 {
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .popup-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .popup-gallery-item {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .popup-gallery-item img,
+        .popup-gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .popup-gallery-item:hover img,
+        .popup-gallery-item:hover video {
+            transform: scale(1.05);
+        }
+
+        .view-more-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .view-more-btn:hover {
+            background: #17a2b8;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .popup-gallery {
+                padding: 1rem;
+            }
+            
+            .popup-gallery-content {
+                padding: 1rem;
+            }
+            
+            .popup-gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .popup-gallery-item {
+                aspect-ratio: 4/3;
+            }
+
+            .popup-gallery h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -25,7 +154,7 @@
             <div class="swiper-wrapper">
                 <div class="swiper-slide" style="background-image: url('../images/atardecer.jpg')">
                     <div class="hero-content">
-                        <h1>Cabañas Mi Pequeño Paraíso</h1>
+                        <h1>Mi Pequeño Paraíso Cottages</h1>
                         <p class="tagline">Your perfect escape in San Antero, Córdoba</p>
                         <div class="hero-features">
                             <span><i class="fas fa-home"></i> 6 Modern Apartments</span>
@@ -53,8 +182,8 @@
                 </div>
                 <div class="swiper-slide" style="background-image: url('../images/pool1.jpg')">
                     <div class="hero-content">
-                        <h1>Pool & Common Areas</h1>
-                        <p class="tagline">Enjoy our top-tier facilities</p>
+                        <h1>Pool and Common Areas</h1>
+                        <p class="tagline">Enjoy our first-class facilities</p>
                         <div class="hero-features">
                             <span><i class="fas fa-swimming-pool"></i> Private Pool</span>
                             <span><i class="fas fa-couch"></i> Hammock Area</span>
@@ -72,9 +201,424 @@
         </div>
     </div>
 
-    <!-- Rest of the English content will go here -->
+    <main class="container">
+        <section id="apartments">
+            <h2>Our Apartments</h2>
+            
+            <div class="apartment-type">
+                <h3>First Floor Apartments</h3>
+                <p class="apartment-description">Four cozy studio apartments, perfect for families or groups of friends.</p>
+                <div class="apartment">
+                    <div class="media-gallery">
+                        <div class="media-thumbnail" onclick="openGallery('apartment-101')">
+                            <video>
+                                <source src="../images/101.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                    <!-- Gallery Popup -->
+                    <div id="apartment-101" class="popup-gallery">
+                        <div class="popup-gallery-content">
+                            <span class="popup-gallery-close" onclick="closeGallery('apartment-101')">&times;</span>
+                            <div class="popup-gallery-main">
+                                <button class="gallery-nav prev" onclick="prevMedia('101')">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <div class="media-container">
+                                    <!-- Media items will be loaded here via JavaScript -->
+                                </div>
+                                <button class="gallery-nav next" onclick="nextMedia('101')">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Apartment 101</h4>
+                    <div class="features">
+                        <p><i class="fas fa-users"></i> Capacity: 6-7 people</p>
+                        <p><i class="fas fa-bed"></i> Spacious rooms</p>
+                        <p><i class="fas fa-kitchen-set"></i> Equipped kitchen</p>
+                        <p><i class="fas fa-snowflake"></i> Air conditioning</p>
+                        <p><i class="fas fa-fan"></i> Fans</p>
+                    </div>
+                    <a href="https://wa.me/+573015382699" target="_blank" class="cta-button">Check Availability</a>
+                </div>
+                <div class="apartment">
+                    <div class="media-gallery">
+                        <img src="../images/102.jpeg" alt="Apartment 102">
+                        <video controls>
+                            <source src="../images/102.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls>
+                            <source src="../images/102-2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <img src="../images/102-2.jpeg" alt="Apartment 102 View 2">
+                        <img src="../images/102-3.jpeg" alt="Apartment 102 View 3">
+                    </div>
+                    <h4>Apartment 102</h4>
+                    <div class="features">
+                        <p><i class="fas fa-users"></i> Capacity: 6-7 people</p>
+                        <p><i class="fas fa-bed"></i> Spacious rooms</p>
+                        <p><i class="fas fa-kitchen-set"></i> Equipped kitchen</p>
+                        <p><i class="fas fa-snowflake"></i> Air conditioning</p>
+                        <p><i class="fas fa-fan"></i> Fans</p>
+                    </div>
+                    <a href="https://wa.me/+573015382699" target="_blank" class="cta-button">Check Availability</a>
+                </div>
+                <div class="apartment">
+                    <div class="media-gallery">
+                        <img src="../images/103.jpg" alt="Apartment 103">
+                        <video controls>
+                            <source src="../images/103.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls>
+                            <source src="../images/103-2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h4>Apartment 103</h4>
+                    <div class="features">
+                        <p><i class="fas fa-users"></i> Capacity: 6-7 people</p>
+                        <p><i class="fas fa-bed"></i> Spacious rooms</p>
+                        <p><i class="fas fa-kitchen-set"></i> Equipped kitchen</p>
+                        <p><i class="fas fa-snowflake"></i> Air conditioning</p>
+                        <p><i class="fas fa-fan"></i> Fans</p>
+                    </div>
+                    <a href="https://wa.me/+573015382699" target="_blank" class="cta-button">Check Availability</a>
+                </div>
+                <div class="apartment">
+                    <div class="media-gallery">
+                        <img src="../images/104.jpg" alt="Apartment 104">
+                        <video controls>
+                            <source src="../images/104.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls>
+                            <source src="../images/104-4.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h4>Apartment 104</h4>
+                    <div class="features">
+                        <p><i class="fas fa-users"></i> Capacity: 6-7 people</p>
+                        <p><i class="fas fa-bed"></i> Spacious rooms</p>
+                        <p><i class="fas fa-kitchen-set"></i> Equipped kitchen</p>
+                        <p><i class="fas fa-snowflake"></i> Air conditioning</p>
+                        <p><i class="fas fa-fan"></i> Fans</p>
+                    </div>
+                    <a href="https://wa.me/+573015382699" target="_blank" class="cta-button">Check Availability</a>
+                </div>
+            </div>
+
+            <div class="apartment-type">
+                <h3>Second Floor Apartments</h3>
+                <p class="apartment-description">Two spacious studio apartments, ideal for large groups or family gatherings.</p>
+                <div class="apartment">
+                    <div class="media-gallery">
+                        <img src="../images/201.jpg" alt="Apartment 201">
+                        <video controls>
+                            <source src="../images/201.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls>
+                            <source src="../images/201-2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <img src="../images/201-2.jpeg" alt="Apartment 201 View 2">
+                        <img src="../images/201-3.jpeg" alt="Apartment 201 View 3">
+                        <img src="../images/201-4.jpeg" alt="Apartment 201 View 4">
+                        <img src="../images/201-5.jpeg" alt="Apartment 201 View 5">
+                        <img src="../images/201-6.jpeg" alt="Apartment 201 View 6">
+                        <img src="../images/201-7.jpeg" alt="Apartment 201 View 7">
+                    </div>
+                    <h4>Apartment 201</h4>
+                    <div class="features">
+                        <p><i class="fas fa-users"></i> Capacity: up to 12 people</p>
+                        <p><i class="fas fa-bed"></i> Large rooms</p>
+                        <p><i class="fas fa-kitchen-set"></i> Full kitchen</p>
+                        <p><i class="fas fa-snowflake"></i> Air conditioning</p>
+                        <p><i class="fas fa-fan"></i> Fans</p>
+                    </div>
+                    <a href="https://wa.me/+573015382699" target="_blank" class="cta-button">Check Availability</a>
+                </div>
+                <div class="apartment">
+                    <div class="media-gallery">
+                        <img src="../images/202.jpeg" alt="Apartment 202">
+                        <video controls>
+                            <source src="../images/202.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h4>Apartment 202</h4>
+                    <div class="features">
+                        <p><i class="fas fa-users"></i> Capacity: up to 12 people</p>
+                        <p><i class="fas fa-bed"></i> Large rooms</p>
+                        <p><i class="fas fa-kitchen-set"></i> Full kitchen</p>
+                        <p><i class="fas fa-snowflake"></i> Air conditioning</p>
+                        <p><i class="fas fa-fan"></i> Fans</p>
+                    </div>
+                    <a href="https://wa.me/+573015382699" target="_blank" class="cta-button">Check Availability</a>
+                </div>
+            </div>
+
+            <div class="apartment-type highlight">
+                <h3>Terrace - Third Floor</h3>
+                <p class="apartment-description">A spectacular common space to relax and socialize with an incredible view.</p>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-hot-tub"></i>
+                        <p>7-person jacuzzi with fountain</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-couch"></i>
+                        <p>Hammock area</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-restroom"></i>
+                        <p>Full bathroom</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-utensils"></i>
+                        <p>Dining tables for everyone</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="amenities">
+            <h2>Services and Amenities</h2>
+            <div class="amenities-grid">
+                <div class="amenities-column">
+                    <h3>Basic Services</h3>
+                    <ul>
+                        <li><i class="fas fa-snowflake"></i> Air conditioning in all apartments</li>
+                        <li><i class="fas fa-fan"></i> Fans</li>
+                        <li><i class="fas fa-wifi"></i> Free Wi-Fi</li>
+                        <li><i class="fas fa-parking"></i> Parking</li>
+                        <li><i class="fas fa-tv"></i> Cable TV</li>
+                    </ul>
+                </div>
+                <div class="amenities-column">
+                    <h3>Common Areas</h3>
+                    <ul>
+                        <li><i class="fas fa-hot-tub"></i> Jacuzzi with fountain (7 people)</li>
+                        <li><i class="fas fa-swimming-pool"></i> Swimming pool</li>
+                        <li><i class="fas fa-couch"></i> Hammock area</li>
+                        <li><i class="fas fa-restroom"></i> Terrace bathrooms</li>
+                    </ul>
+                </div>
+                <div class="amenities-column">
+                    <h3>Kitchen Area</h3>
+                    <ul>
+                        <li><i class="fas fa-fire"></i> Wood stove for traditional stews</li>
+                        <li><i class="fas fa-burn"></i> Gas BBQ</li>
+                        <li><i class="fas fa-smoke"></i> Smoker</li>
+                        <li><i class="fas fa-kitchen-set"></i> Equipped kitchens in each apartment</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="special-events" class="highlight-section">
+            <h2>Special Events</h2>
+            <div class="event-card">
+                <img src="../images/festival-del-burro.jpg" alt="National Donkey Festival">
+                <h3><i class="fas fa-calendar-star"></i> National Donkey Festival 2025</h3>
+                <p>Don't miss it! Come and enjoy the national donkey festival. Book now!</p>
+                <a href="#contact" class="cta-button">Book for the Festival</a>
+            </div>
+        </section>
+
+        <section id="location">
+            <h2>Location</h2>
+            <p>Located on the road to Cispatá Bay, San Antero, Córdoba. A strategic location to enjoy the best of the region.</p>
+            <div class="location-container">
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d987.2168342135846!2d-75.76596989999999!3d9.4041326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e59a7a5723aabb7%3A0x63f83c4b1480306b!2sCaba%C3%B1as%20mi%20peque%C3%B1o%20paraiso!5e0!3m2!1sen!2sus!4v1710644753274!5m2!1sen!2sus"
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div class="location-info">
+                    <div class="directions">
+                        <h3><i class="fas fa-map-marked-alt"></i> Prime Location</h3>
+                        <p>We are located on the road to Cispatá Bay, just minutes from San Antero's center. Enjoy a quiet and safe location, perfect for a relaxing vacation.</p>
+                        <a href="https://www.google.com/maps/place/Caba%C3%B1as+mi+peque%C3%B1o+paraiso/@9.4041326,-75.7659699,17z" 
+                           target="_blank" 
+                           class="cta-button">
+                            <i class="fas fa-directions"></i> View Route on Google Maps
+                        </a>
+                    </div>
+                    <img src="../images/atardecer.jpg" alt="View of Cispatá Bay" class="location-image">
+                </div>
+            </div>
+        </section>
+
+        <section id="attractions">
+            <h2>Nearby Attractions</h2>
+            <div class="attractions-grid">
+                <div class="attraction-category">
+                    <h3><i class="fas fa-utensils"></i> Restaurants</h3>
+                    <div class="attraction-items">
+                        <div class="attraction-item">
+                            <h4>Pescar Restaurant</h4>
+                            <p>Famous for its fresh seafood and regional dishes.</p>
+                            <p><i class="fas fa-fish"></i> Specialty: Fish and seafood</p>
+                        </div>
+                        <div class="attraction-item">
+                            <h4>OCEANO'S Restaurant & Bar</h4>
+                            <p>Beachfront restaurant and bar with refreshing drinks and snacks.</p>
+                            <p><i class="fas fa-cocktail"></i> Beach cocktails and snacks</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="attraction-category">
+                    <h3><i class="fas fa-water"></i> Beaches and Nature</h3>
+                    <div class="attraction-items">
+                        <div class="attraction-item">
+                            <h4>La Caimanera</h4>
+                            <p>Natural reserve with mangroves and diverse local wildlife.</p>
+                            <p><i class="fas fa-tree"></i> Perfect for ecotourism</p>
+                        </div>
+                        <div class="attraction-item">
+                            <h4>Mud Volcano</h4>
+                            <p>Unique experience with natural mud thermal baths.</p>
+                            <p><i class="fas fa-hot-tub"></i> Therapeutic benefits</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="attraction-category">
+                    <h3><i class="fas fa-ship"></i> Rosario Islands</h3>
+                    <div class="attraction-items">
+                        <div class="attraction-item">
+                            <h4>Tintipán Island</h4>
+                            <p>The largest island in the archipelago, known for its virgin beaches and crystal-clear waters.</p>
+                            <p><i class="fas fa-clock"></i> Boat tour: 45 minutes</p>
+                        </div>
+                        <div class="attraction-item">
+                            <h4>Múcura Island</h4>
+                            <p>Caribbean paradise ideal for snorkeling and water sports.</p>
+                            <p><i class="fas fa-swimming-pool"></i> Water activities</p>
+                        </div>
+                        <div class="attraction-item">
+                            <h4>Santa Cruz del Islote</h4>
+                            <p>The most densely populated artificial island in the world, a unique cultural experience.</p>
+                            <p><i class="fas fa-users"></i> Authentic cultural experience</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="attraction-category">
+                    <h3><i class="fas fa-calendar-alt"></i> Activities</h3>
+                    <div class="attraction-items">
+                        <div class="attraction-item">
+                            <h4>Boat Tours</h4>
+                            <p>Excursions to the islands and bay tours.</p>
+                            <p><i class="fas fa-ship"></i> Daily departures</p>
+                        </div>
+                        <div class="attraction-item">
+                            <h4>Sport Fishing</h4>
+                            <p>Fishing experiences with local fishermen.</p>
+                            <p><i class="fas fa-fish"></i> Experienced guides</p>
+                        </div>
+                        <div class="attraction-item">
+                            <h4>Bird Watching</h4>
+                            <p>Bird observation in La Caimanera's mangroves.</p>
+                            <p><i class="fas fa-dove"></i> Local flora and fauna</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews">
+            <h2>Guest Reviews</h2>
+            <div class="review-grid">
+                <div class="review-card">
+                    <div class="review-content">
+                        <i class="fas fa-quote-left"></i>
+                        <p>Excellent place near the beach, super comfortable, economical and clean with the best service, highly recommended!!!!</p>
+                        <footer>- Leonardo Antonio Rincon Valencia</footer>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-content">
+                        <i class="fas fa-quote-left"></i>
+                        <p>Excellent service and divine and super comfortable apartments, recommended</p>
+                        <footer>- Franco Franco</footer>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery">
+            <h2>Photo Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="../images/pool1.jpg" alt="Main Pool">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/pool2.jpg" alt="Pool Area">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/pool3.jpg" alt="Rest Area">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/pool4.jpg" alt="Pool View">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/pool5.jpg" alt="Recreational Area">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/atardecer2.jpg" alt="Sunset in San Antero">
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="pricing-section">
+            <h2>Availability</h2>
+            <p>To check availability and make reservations, contact us via WhatsApp.</p>
+            <a href="https://wa.me/+573015382699" class="cta-button primary" target="_blank">
+                <i class="fab fa-whatsapp"></i> Check Availability
+            </a>
+        </section>
+
+        <section id="faq" class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>What are the check-in and check-out times?</h3>
+                    <p>Check-in: 3:00 PM<br>Check-out: 11:00 AM</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What payment methods do you accept?</h3>
+                    <p>We accept cash, bank transfers, and Nequi payments.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do you have parking?</h3>
+                    <p>Yes, we have private parking at no additional cost.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Are pets allowed?</h3>
+                    <p>Please contact us about our pet policy.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <footer>
-        <p>&copy; 2024 Cabañas Mi Pequeño Paraíso. All rights reserved.</p>
+        <p>&copy; 2024 Condominio Aparta estudio. All rights reserved.</p>
         <div class="social-links">
             <a href="https://www.facebook.com/p/Cabañas-Mi-pequeño-paraíso-Playa-Blanca-100063705289407/" target="_blank" class="social-link">
                 <i class="fab fa-facebook"></i> Follow us on Facebook
@@ -84,9 +628,9 @@
             </a>
         </div>
         <div id="contact" class="contact-info">
-            <h3>Bookings and Contact</h3>
+            <h3>Reservations and Contact</h3>
             <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/+573015382699" target="_blank">+57 301 538 2699</a></p>
-            <p><i class="fas fa-map-marker-alt"></i> Via Bahía de Cispatá, San Antero, Córdoba, Colombia</p>
+            <p><i class="fas fa-map-marker-alt"></i> Road to Cispatá Bay, San Antero, Córdoba, Colombia</p>
             <p><i class="fas fa-clock"></i> Open 24/7</p>
             <p><i class="fas fa-dollar-sign"></i> Price range: Medium</p>
         </div>
