@@ -203,14 +203,16 @@ document.addEventListener('keydown', function(event) {
 // Initialize galleries when document is loaded
 document.addEventListener('DOMContentLoaded', function() {
     Object.keys(mediaGalleries).forEach(apartmentId => {
-        updateMediaDisplay(apartmentId);
-        
-        // Add click event to main media container
-        const mainContainer = document.querySelector(`.apartment:has(h4:contains('${apartmentId}')) .main-media-container`);
-        mainContainer.addEventListener('click', function(e) {
-            if (!e.target.closest('.gallery-nav') && !e.target.closest('.gallery-close')) {
-                openGallery(apartmentId);
+        const apartmentElement = document.querySelector(`#apartment-${apartmentId}`);
+        if (apartmentElement) {
+            const mainContainer = apartmentElement.querySelector('.media-container');
+            if (mainContainer) {
+                mainContainer.addEventListener('click', function(e) {
+                    if (!e.target.closest('.gallery-nav') && !e.target.closest('.gallery-close')) {
+                        openGallery(`apartment-${apartmentId}`);
+                    }
+                });
             }
-        });
+        }
     });
 });
