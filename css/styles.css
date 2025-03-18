@@ -835,8 +835,23 @@ footer p {
 
 /* Pricing Section */
 .pricing-section {
+    text-align: center;
+    margin: 4rem auto;
     padding: 4rem 2rem;
     background: var(--light-bg);
+}
+
+.pricing-section h2 {
+    margin-bottom: 1rem;
+}
+
+.pricing-section p {
+    margin-bottom: 1.5rem;
+}
+
+.pricing-section .cta-button {
+    display: inline-block;
+    margin-top: 1rem;
 }
 
 .pricing-grid {
@@ -912,7 +927,9 @@ footer p {
 
 /* FAQ Section */
 .faq-section {
+    margin-top: 4rem;
     padding: 4rem 2rem;
+    background: var(--light-bg);
 }
 
 .faq-grid {
