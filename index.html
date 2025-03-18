@@ -10,6 +10,144 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Add Swiper's CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        /* Popup Gallery Styles */
+        .popup-gallery {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .popup-gallery.active {
+            display: block !important;
+        }
+
+        .popup-gallery-content {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: transparent;
+            padding: 2rem;
+        }
+
+        .popup-gallery-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 10000;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup-gallery-close:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .popup-gallery h3 {
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .popup-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .popup-gallery-item {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .popup-gallery-item img,
+        .popup-gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .popup-gallery-item:hover img,
+        .popup-gallery-item:hover video {
+            transform: scale(1.05);
+        }
+
+        .view-more-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .view-more-btn:hover {
+            background: #17a2b8;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .popup-gallery {
+                padding: 1rem;
+            }
+            
+            .popup-gallery-content {
+                padding: 1rem;
+            }
+            
+            .popup-gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .popup-gallery-item {
+                aspect-ratio: 4/3;
+            }
+
+            .popup-gallery h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Ensure consistent size for images and videos in the gallery */
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -84,14 +222,146 @@
                 <h3>Apartamentos Primer Piso</h3>
                 <p class="apartment-description">Cuatro acogedores apartamentos tipo estudio, perfectos para familias o grupos de amigos.</p>
                 <div class="apartment">
-                    <img src="images/pool1.jpg" alt="Apartamento Primer Piso">
-                    <h4>Apartamento Estudio</h4>
+                    <div class="media-gallery">
+                        <div class="media-thumbnail" onclick="openGallery('apartment-101')">
+                            <video>
+                                <source src="images/101.mp4" type="video/mp4">
+                                Tu navegador no soporta el elemento de video.
+                            </video>
+                        </div>
+                    </div>
+                    <!-- Gallery Popup -->
+                    <div id="apartment-101" class="popup-gallery">
+                        <div class="popup-gallery-content">
+                            <span class="popup-gallery-close" onclick="closeGallery('apartment-101')">&times;</span>
+                            <div class="popup-gallery-main">
+                                <button class="gallery-nav prev" onclick="prevMedia('101')">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <div class="media-container">
+                                    <!-- Media items will be loaded here via JavaScript -->
+                                </div>
+                                <button class="gallery-nav next" onclick="nextMedia('101')">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Apartamento 101</h4>
                     <div class="features">
                         <p><i class="fas fa-users"></i> Capacidad: 6-7 personas</p>
                         <p><i class="fas fa-bed"></i> Habitaciones espaciosas</p>
                         <p><i class="fas fa-kitchen-set"></i> Cocina equipada</p>
                         <p><i class="fas fa-snowflake"></i> Aire acondicionado</p>
-                        <p><i class="fas fa-broom"></i> Servicio de limpieza incluido</p>
+                        <p><i class="fas fa-fan"></i> Ventiladores</p>
+                    </div>
+                    <a href="https://wa.me/+573015382699" target="_blank" class="cta-button">Consultar Disponibilidad</a>
+                </div>
+                <div class="apartment">
+                    <div class="media-gallery">
+                        <div class="media-thumbnail" onclick="openGallery('apartment-102')">
+                            <video>
+                                <source src="images/102.mp4" type="video/mp4">
+                                Tu navegador no soporta el elemento de video.
+                            </video>
+                        </div>
+                    </div>
+                    <!-- Gallery Popup -->
+                    <div id="apartment-102" class="popup-gallery">
+                        <div class="popup-gallery-content">
+                            <span class="popup-gallery-close" onclick="closeGallery('apartment-102')">&times;</span>
+                            <div class="popup-gallery-main">
+                                <button class="gallery-nav prev" onclick="prevMedia('102')">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <div class="media-container">
+                                    <!-- Media items will be loaded here via JavaScript -->
+                                </div>
+                                <button class="gallery-nav next" onclick="nextMedia('102')">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Apartamento 102</h4>
+                    <div class="features">
+                        <p><i class="fas fa-users"></i> Capacidad: 6-7 personas</p>
+                        <p><i class="fas fa-bed"></i> Habitaciones espaciosas</p>
+                        <p><i class="fas fa-kitchen-set"></i> Cocina equipada</p>
+                        <p><i class="fas fa-snowflake"></i> Aire acondicionado</p>
+                        <p><i class="fas fa-fan"></i> Ventiladores</p>
+                    </div>
+                    <a href="https://wa.me/+573015382699" target="_blank" class="cta-button">Consultar Disponibilidad</a>
+                </div>
+                <div class="apartment">
+                    <div class="media-gallery">
+                        <div class="media-thumbnail" onclick="openGallery('apartment-103')">
+                            <video>
+                                <source src="images/103.mp4" type="video/mp4">
+                                Tu navegador no soporta el elemento de video.
+                            </video>
+                        </div>
+                    </div>
+                    <!-- Gallery Popup -->
+                    <div id="apartment-103" class="popup-gallery">
+                        <div class="popup-gallery-content">
+                            <span class="popup-gallery-close" onclick="closeGallery('apartment-103')">&times;</span>
+                            <div class="popup-gallery-main">
+                                <button class="gallery-nav prev" onclick="prevMedia('103')">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <div class="media-container">
+                                    <!-- Media items will be loaded here via JavaScript -->
+                                </div>
+                                <button class="gallery-nav next" onclick="nextMedia('103')">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Apartamento 103</h4>
+                    <div class="features">
+                        <p><i class="fas fa-users"></i> Capacidad: 6-7 personas</p>
+                        <p><i class="fas fa-bed"></i> Habitaciones espaciosas</p>
+                        <p><i class="fas fa-kitchen-set"></i> Cocina equipada</p>
+                        <p><i class="fas fa-snowflake"></i> Aire acondicionado</p>
+                        <p><i class="fas fa-fan"></i> Ventiladores</p>
+                    </div>
+                    <a href="https://wa.me/+573015382699" target="_blank" class="cta-button">Consultar Disponibilidad</a>
+                </div>
+                <div class="apartment">
+                    <div class="media-gallery">
+                        <div class="media-thumbnail" onclick="openGallery('apartment-104')">
+                            <video>
+                                <source src="images/104.mp4" type="video/mp4">
+                                Tu navegador no soporta el elemento de video.
+                            </video>
+                        </div>
+                    </div>
+                    <!-- Gallery Popup -->
+                    <div id="apartment-104" class="popup-gallery">
+                        <div class="popup-gallery-content">
+                            <span class="popup-gallery-close" onclick="closeGallery('apartment-104')">&times;</span>
+                            <div class="popup-gallery-main">
+                                <button class="gallery-nav prev" onclick="prevMedia('104')">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <div class="media-container">
+                                    <!-- Media items will be loaded here via JavaScript -->
+                                </div>
+                                <button class="gallery-nav next" onclick="nextMedia('104')">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Apartamento 104</h4>
+                    <div class="features">
+                        <p><i class="fas fa-users"></i> Capacidad: 6-7 personas</p>
+                        <p><i class="fas fa-bed"></i> Habitaciones espaciosas</p>
+                        <p><i class="fas fa-kitchen-set"></i> Cocina equipada</p>
+                        <p><i class="fas fa-snowflake"></i> Aire acondicionado</p>
+                        <p><i class="fas fa-fan"></i> Ventiladores</p>
                     </div>
                     <a href="https://wa.me/+573015382699" target="_blank" class="cta-button">Consultar Disponibilidad</a>
                 </div>
@@ -101,14 +371,74 @@
                 <h3>Apartamentos Segundo Piso</h3>
                 <p class="apartment-description">Dos amplios apartamentos tipo estudio, ideales para grupos grandes o reuniones familiares.</p>
                 <div class="apartment">
-                    <img src="images/pool2.jpg" alt="Apartamento Segundo Piso">
-                    <h4>Apartamento Grande</h4>
+                    <div class="media-gallery">
+                        <div class="media-thumbnail" onclick="openGallery('apartment-201')">
+                            <video>
+                                <source src="images/201.mp4" type="video/mp4">
+                                Tu navegador no soporta el elemento de video.
+                            </video>
+                        </div>
+                    </div>
+                    <!-- Gallery Popup -->
+                    <div id="apartment-201" class="popup-gallery">
+                        <div class="popup-gallery-content">
+                            <span class="popup-gallery-close" onclick="closeGallery('apartment-201')">&times;</span>
+                            <div class="popup-gallery-main">
+                                <button class="gallery-nav prev" onclick="prevMedia('201')">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <div class="media-container">
+                                    <!-- Media items will be loaded here via JavaScript -->
+                                </div>
+                                <button class="gallery-nav next" onclick="nextMedia('201')">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Apartamento 201</h4>
                     <div class="features">
                         <p><i class="fas fa-users"></i> Capacidad: hasta 12 personas</p>
                         <p><i class="fas fa-bed"></i> Amplias habitaciones</p>
                         <p><i class="fas fa-kitchen-set"></i> Cocina completa</p>
                         <p><i class="fas fa-snowflake"></i> Aire acondicionado</p>
-                        <p><i class="fas fa-broom"></i> Servicio de limpieza incluido</p>
+                        <p><i class="fas fa-fan"></i> Ventiladores</p>
+                    </div>
+                    <a href="https://wa.me/+573015382699" target="_blank" class="cta-button">Consultar Disponibilidad</a>
+                </div>
+                <div class="apartment">
+                    <div class="media-gallery">
+                        <div class="media-thumbnail" onclick="openGallery('apartment-202')">
+                            <video>
+                                <source src="images/202.mp4" type="video/mp4">
+                                Tu navegador no soporta el elemento de video.
+                            </video>
+                        </div>
+                    </div>
+                    <!-- Gallery Popup -->
+                    <div id="apartment-202" class="popup-gallery">
+                        <div class="popup-gallery-content">
+                            <span class="popup-gallery-close" onclick="closeGallery('apartment-202')">&times;</span>
+                            <div class="popup-gallery-main">
+                                <button class="gallery-nav prev" onclick="prevMedia('202')">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <div class="media-container">
+                                    <!-- Media items will be loaded here via JavaScript -->
+                                </div>
+                                <button class="gallery-nav next" onclick="nextMedia('202')">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Apartamento 202</h4>
+                    <div class="features">
+                        <p><i class="fas fa-users"></i> Capacidad: hasta 12 personas</p>
+                        <p><i class="fas fa-bed"></i> Amplias habitaciones</p>
+                        <p><i class="fas fa-kitchen-set"></i> Cocina completa</p>
+                        <p><i class="fas fa-snowflake"></i> Aire acondicionado</p>
+                        <p><i class="fas fa-fan"></i> Ventiladores</p>
                     </div>
                     <a href="https://wa.me/+573015382699" target="_blank" class="cta-button">Consultar Disponibilidad</a>
                 </div>
@@ -131,8 +461,8 @@
                         <p>Baño completo</p>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-solar-panel"></i>
-                        <p>Paneles solares</p>
+                        <i class="fas fa-utensils"></i>
+                        <p>Mesas de comedor para todos</p>
                     </div>
                 </div>
             </div>
@@ -145,10 +475,10 @@
                     <h3>Servicios Básicos</h3>
                     <ul>
                         <li><i class="fas fa-snowflake"></i> Aire acondicionado en todos los apartamentos</li>
+                        <li><i class="fas fa-fan"></i> Ventiladores</li>
                         <li><i class="fas fa-wifi"></i> Wi-Fi Gratis</li>
                         <li><i class="fas fa-parking"></i> Parqueadero</li>
                         <li><i class="fas fa-tv"></i> TV por cable</li>
-                        <li><i class="fas fa-broom"></i> Servicio de limpieza</li>
                     </ul>
                 </div>
                 <div class="amenities-column">
@@ -222,6 +552,11 @@
                             <h4>Restaurante Pescar</h4>
                             <p>Famoso por sus mariscos frescos y platos típicos de la región.</p>
                             <p><i class="fas fa-fish"></i> Especialidad: Pescados y mariscos</p>
+                        </div>
+                        <div class="attraction-item">
+                            <h4>Restaurante - Bar OCEANO'S</h4>
+                            <p>Restaurante y bar frente al mar con bebidas refrescantes y snacks.</p>
+                            <p><i class="fas fa-cocktail"></i> Cócteles y snacks en la playa</p>
                         </div>
                     </div>
                 </div>
@@ -327,46 +662,39 @@
                 <div class="gallery-item">
                     <img src="images/atardecer2.jpg" alt="Atardecer en San Antero">
                 </div>
+                <div class="gallery-item">
+                    <img src="images/casa.jpeg" alt="Casa View 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/casa2.jpeg" alt="Casa View 2">
+                </div>
+                <div class="gallery-item">
+                    <video controls>
+                        <source src="images/entrada-casa.mp4" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/terraza.jpeg" alt="Terrace View 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/terraza.jpeg" alt="Terrace View 2">
+                </div>
+                <div class="gallery-item">
+                    <video controls>
+                        <source src="images/terraza.mp4" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                </div>
             </div>
         </section>
 
         <section id="pricing" class="pricing-section">
-            <h2>Tarifas y Disponibilidad</h2>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Apartamento Primer Piso</h3>
-                    <div class="price">
-                        <span class="amount">$60.000</span>
-                        <span class="period">por noche por persona</span>
-                    </div>
-                    <ul class="features">
-                        <li><i class="fas fa-users"></i> Capacidad: 6-7 personas</li>
-                        <li><i class="fas fa-bed"></i> 2 habitaciones</li>
-                        <li><i class="fas fa-snowflake"></i> Aire acondicionado</li>
-                        <li><i class="fas fa-tv"></i> TV por cable</li>
-                    </ul>
-                    <a href="https://wa.me/+573014109986" class="cta-button" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Reservar
-                    </a>
-                </div>
-                <div class="pricing-card featured">
-                    <div class="featured-label">Más Popular</div>
-                    <h3>Apartamento Segundo Piso</h3>
-                    <div class="price">
-                        <span class="amount">$60.000</span>
-                        <span class="period">por noche por persona</span>
-                    </div>
-                    <ul class="features">
-                        <li><i class="fas fa-users"></i> Capacidad: hasta 12 personas</li>
-                        <li><i class="fas fa-bed"></i> 3 habitaciones</li>
-                        <li><i class="fas fa-snowflake"></i> Aire acondicionado</li>
-                        <li><i class="fas fa-tv"></i> TV por cable</li>
-                    </ul>
-                    <a href="https://wa.me/+573014109986" class="cta-button primary" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Reservar
-                    </a>
-                </div>
-            </div>
+            <h2>Disponibilidad</h2>
+            <p>Para consultar disponibilidad y reservas, contáctanos por WhatsApp.</p>
+            <a href="https://wa.me/+573015382699" class="cta-button primary" target="_blank">
+                <i class="fab fa-whatsapp"></i> Consultar Disponibilidad
+            </a>
         </section>
 
         <section id="faq" class="faq-section">
@@ -414,5 +742,48 @@
     <!-- Add scripts before closing body tag -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // Popup Gallery Functions
+        function openGallery(galleryId) {
+            const gallery = document.getElementById(galleryId);
+            if (gallery) {
+                gallery.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                // Add event listeners for closing
+                gallery.addEventListener('click', function(e) {
+                    if (e.target === gallery) {
+                        closeGallery(galleryId);
+                    }
+                });
+            }
+        }
+
+        function closeGallery(galleryId) {
+            const gallery = document.getElementById(galleryId);
+            if (gallery) {
+                gallery.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Close gallery when clicking outside
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('popup-gallery')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close gallery with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const galleries = document.querySelectorAll('.popup-gallery');
+                galleries.forEach(gallery => {
+                    gallery.style.display = 'none';
+                });
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
 </body>
 </html> 
