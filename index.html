@@ -11,134 +11,6 @@
     <!-- Add Swiper's CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
-        /* Popup Gallery Styles */
-        .popup-gallery {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 9999;
-            overflow-y: auto;
-            padding: 2rem;
-        }
-
-        .popup-gallery.active {
-            display: block !important;
-        }
-
-        .popup-gallery-content {
-            position: relative;
-            max-width: 1400px;
-            margin: 0 auto;
-            background: transparent;
-            padding: 2rem;
-        }
-
-        .popup-gallery-close {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            color: white;
-            font-size: 2.5rem;
-            cursor: pointer;
-            z-index: 10000;
-            background: rgba(0, 0, 0, 0.5);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background-color 0.3s ease;
-        }
-
-        .popup-gallery-close:hover {
-            background: rgba(0, 0, 0, 0.8);
-        }
-
-        .popup-gallery h3 {
-            color: white;
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .popup-gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .popup-gallery-item {
-            position: relative;
-            aspect-ratio: 16/9;
-            overflow: hidden;
-            border-radius: 8px;
-            cursor: pointer;
-            background: #000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .popup-gallery-item img,
-        .popup-gallery-item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .popup-gallery-item:hover img,
-        .popup-gallery-item:hover video {
-            transform: scale(1.05);
-        }
-
-        .view-more-btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            font-size: 1.1rem;
-        }
-
-        .view-more-btn:hover {
-            background: #17a2b8;
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 768px) {
-            .popup-gallery {
-                padding: 1rem;
-            }
-            
-            .popup-gallery-content {
-                padding: 1rem;
-            }
-            
-            .popup-gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .popup-gallery-item {
-                aspect-ratio: 4/3;
-            }
-
-            .popup-gallery h3 {
-                font-size: 1.5rem;
-            }
-        }
-
         /* Ensure consistent size for images and videos in the gallery */
         .gallery-item img,
         .gallery-item video {
@@ -146,6 +18,13 @@
             height: auto;
             max-height: 80vh;
             object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
         }
     </style>
 </head>
@@ -223,29 +102,10 @@
                 <p class="apartment-description">Cuatro acogedores apartamentos tipo estudio, perfectos para familias o grupos de amigos.</p>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <div class="media-thumbnail" onclick="openGallery('apartment-101')">
-                            <video>
-                                <source src="images/101.mp4" type="video/mp4">
-                                Tu navegador no soporta el elemento de video.
-                            </video>
-                        </div>
-                    </div>
-                    <!-- Gallery Popup -->
-                    <div id="apartment-101" class="popup-gallery">
-                        <div class="popup-gallery-content">
-                            <span class="popup-gallery-close" onclick="closeGallery('apartment-101')">&times;</span>
-                            <div class="popup-gallery-main">
-                                <button class="gallery-nav prev" onclick="prevMedia('101')">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <div class="media-container">
-                                    <!-- Media items will be loaded here via JavaScript -->
-                                </div>
-                                <button class="gallery-nav next" onclick="nextMedia('101')">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>
+                        <video controls>
+                            <source src="images/101.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
                     </div>
                     <h4>Apartamento 101</h4>
                     <div class="features">
@@ -259,29 +119,10 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <div class="media-thumbnail" onclick="openGallery('apartment-102')">
-                            <video>
-                                <source src="images/102.mp4" type="video/mp4">
-                                Tu navegador no soporta el elemento de video.
-                            </video>
-                        </div>
-                    </div>
-                    <!-- Gallery Popup -->
-                    <div id="apartment-102" class="popup-gallery">
-                        <div class="popup-gallery-content">
-                            <span class="popup-gallery-close" onclick="closeGallery('apartment-102')">&times;</span>
-                            <div class="popup-gallery-main">
-                                <button class="gallery-nav prev" onclick="prevMedia('102')">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <div class="media-container">
-                                    <!-- Media items will be loaded here via JavaScript -->
-                                </div>
-                                <button class="gallery-nav next" onclick="nextMedia('102')">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>
+                        <video controls>
+                            <source src="images/102.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
                     </div>
                     <h4>Apartamento 102</h4>
                     <div class="features">
@@ -295,29 +136,10 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <div class="media-thumbnail" onclick="openGallery('apartment-103')">
-                            <video>
-                                <source src="images/103.mp4" type="video/mp4">
-                                Tu navegador no soporta el elemento de video.
-                            </video>
-                        </div>
-                    </div>
-                    <!-- Gallery Popup -->
-                    <div id="apartment-103" class="popup-gallery">
-                        <div class="popup-gallery-content">
-                            <span class="popup-gallery-close" onclick="closeGallery('apartment-103')">&times;</span>
-                            <div class="popup-gallery-main">
-                                <button class="gallery-nav prev" onclick="prevMedia('103')">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <div class="media-container">
-                                    <!-- Media items will be loaded here via JavaScript -->
-                                </div>
-                                <button class="gallery-nav next" onclick="nextMedia('103')">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>
+                        <video controls>
+                            <source src="images/103.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
                     </div>
                     <h4>Apartamento 103</h4>
                     <div class="features">
@@ -331,29 +153,10 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <div class="media-thumbnail" onclick="openGallery('apartment-104')">
-                            <video>
-                                <source src="images/104.mp4" type="video/mp4">
-                                Tu navegador no soporta el elemento de video.
-                            </video>
-                        </div>
-                    </div>
-                    <!-- Gallery Popup -->
-                    <div id="apartment-104" class="popup-gallery">
-                        <div class="popup-gallery-content">
-                            <span class="popup-gallery-close" onclick="closeGallery('apartment-104')">&times;</span>
-                            <div class="popup-gallery-main">
-                                <button class="gallery-nav prev" onclick="prevMedia('104')">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <div class="media-container">
-                                    <!-- Media items will be loaded here via JavaScript -->
-                                </div>
-                                <button class="gallery-nav next" onclick="nextMedia('104')">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>
+                        <video controls>
+                            <source src="images/104.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
                     </div>
                     <h4>Apartamento 104</h4>
                     <div class="features">
@@ -372,29 +175,10 @@
                 <p class="apartment-description">Dos amplios apartamentos tipo estudio, ideales para grupos grandes o reuniones familiares.</p>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <div class="media-thumbnail" onclick="openGallery('apartment-201')">
-                            <video>
-                                <source src="images/201.mp4" type="video/mp4">
-                                Tu navegador no soporta el elemento de video.
-                            </video>
-                        </div>
-                    </div>
-                    <!-- Gallery Popup -->
-                    <div id="apartment-201" class="popup-gallery">
-                        <div class="popup-gallery-content">
-                            <span class="popup-gallery-close" onclick="closeGallery('apartment-201')">&times;</span>
-                            <div class="popup-gallery-main">
-                                <button class="gallery-nav prev" onclick="prevMedia('201')">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <div class="media-container">
-                                    <!-- Media items will be loaded here via JavaScript -->
-                                </div>
-                                <button class="gallery-nav next" onclick="nextMedia('201')">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>
+                        <video controls>
+                            <source src="images/201.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
                     </div>
                     <h4>Apartamento 201</h4>
                     <div class="features">
@@ -408,29 +192,10 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <div class="media-thumbnail" onclick="openGallery('apartment-202')">
-                            <video>
-                                <source src="images/202.mp4" type="video/mp4">
-                                Tu navegador no soporta el elemento de video.
-                            </video>
-                        </div>
-                    </div>
-                    <!-- Gallery Popup -->
-                    <div id="apartment-202" class="popup-gallery">
-                        <div class="popup-gallery-content">
-                            <span class="popup-gallery-close" onclick="closeGallery('apartment-202')">&times;</span>
-                            <div class="popup-gallery-main">
-                                <button class="gallery-nav prev" onclick="prevMedia('202')">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <div class="media-container">
-                                    <!-- Media items will be loaded here via JavaScript -->
-                                </div>
-                                <button class="gallery-nav next" onclick="nextMedia('202')">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>
+                        <video controls>
+                            <source src="images/202.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
                     </div>
                     <h4>Apartamento 202</h4>
                     <div class="features">
