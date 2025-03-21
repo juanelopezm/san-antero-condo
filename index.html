@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cabañas Mi Pequeño Paraíso - Apartamentos vacacionales en San Antero, Córdoba. Disfruta de nuestras 6 cabañas modernas con capacidad de 6-12 personas, jacuzzi, piscina y hermosas vistas a la Bahía de Cispatá.">
-    <meta name="keywords" content="cabañas san antero, apartamentos san antero, alojamiento córdoba, vacaciones caribe colombiano, playa blanca san antero">
+    <meta name="description" content="Cabañas Mi Pequeño Paraíso - Alojamiento de lujo en San Antero, Córdoba. Disfruta de vistas al mar, piscina privada, jacuzzi y comodidades modernas para 6-12 personas.">
+    <meta name="keywords" content="cabañas, san antero, córdoba, colombia, playa, vacaciones, alojamiento, piscina, jacuzzi, apartamentos, vista al mar">
+    <meta name="author" content="Cabañas Mi Pequeño Paraíso">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Cabañas Mi Pequeño Paraíso - San Antero">
+    <meta property="og:description" content="Alojamiento de lujo en San Antero con vistas al mar y piscina privada">
+    <meta property="og:image" content="assets/images/atardecer.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_CO">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://juanelopezm.github.io/san-antero-condo/">
+    <link rel="alternate" hreflang="en" href="https://juanelopezm.github.io/san-antero-condo/en/">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style">
+    <link rel="preload" href="assets/css/styles.css" as="style">
+    <link rel="preload" href="assets/images/atardecer.jpg" as="image">
     <title>Cabañas Mi Pequeño Paraíso - Tu Paraíso en San Antero</title>
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -34,18 +47,18 @@
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="language-selector">
+    <header role="banner">
+        <nav role="navigation" aria-label="Navegación principal">
+            <div class="language-selector" role="region" aria-label="Selector de idioma">
                 <a href="#" class="active">Español</a> |
                 <a href="en/index.html">English</a>
             </div>
         </nav>
     </header>
 
-    <div class="hero-section">
+    <div class="hero-section" role="region" aria-label="Presentación principal">
         <!-- Slider main container -->
-        <div class="swiper-container">
+        <div class="swiper-container" role="region" aria-label="Carrusel de imágenes principales">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" style="background-image: url('assets/images/atardecer.jpg')">
                     <div class="hero-content">
@@ -98,9 +111,9 @@
         </div>
     </div>
 
-    <main class="container">
-        <section id="apartments">
-            <h2>Nuestros Apartamentos</h2>
+    <main class="container" role="main">
+        <section id="apartments" role="region" aria-labelledby="apartments-heading">
+            <h2 id="apartments-heading">Nuestros Apartamentos</h2>
             
             <div class="apartment-type">
                 <h3>Apartamentos Primer Piso</h3>
@@ -238,8 +251,8 @@
             </div>
         </section>
 
-        <section id="amenities">
-            <h2>Servicios y Comodidades</h2>
+        <section id="amenities" role="region" aria-labelledby="amenities-heading">
+            <h2 id="amenities-heading">Servicios y Comodidades</h2>
             <div class="amenities-grid">
                 <div class="amenities-column">
                     <h3>Servicios Básicos</h3>
@@ -282,8 +295,8 @@
             </div>
         </section>
 
-        <section id="location">
-            <h2>Ubicación</h2>
+        <section id="location" role="region" aria-labelledby="location-heading">
+            <h2 id="location-heading">Ubicación</h2>
             <p>Ubicados en la Vía a Bahía de Cispatá, San Antero, Córdoba. Un lugar estratégico para disfrutar de lo mejor de la región.</p>
             <div class="location-container">
                 <div class="map-container">
@@ -411,8 +424,8 @@
             </div>
         </section>
 
-        <section class="gallery">
-            <h2>Videos</h2>
+        <section class="gallery" role="region" aria-labelledby="videos-heading">
+            <h2 id="videos-heading">Videos</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
                     <video controls>
@@ -441,59 +454,59 @@
             </div>
         </section>
 
-        <section class="gallery">
-            <h2>Galería de Fotos</h2>
+        <section class="gallery" role="region" aria-labelledby="photos-heading">
+            <h2 id="photos-heading">Galería de Fotos</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="assets/images/pool1.jpg" alt="Piscina Principal">
+                    <img src="assets/images/pool1.jpg" alt="Piscina Principal" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/pool2.jpg" alt="Área de Piscina">
+                    <img src="assets/images/pool2.jpg" alt="Área de Piscina" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/pool3.jpg" alt="Zona de Descanso">
+                    <img src="assets/images/pool3.jpg" alt="Zona de Descanso" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/pool4.jpg" alt="Vista de la Piscina">
+                    <img src="assets/images/pool4.jpg" alt="Vista de la Piscina" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/pool5.jpg" alt="Área Recreativa">
+                    <img src="assets/images/pool5.jpg" alt="Área Recreativa" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/atardecer2.jpg" alt="Atardecer en San Antero">
+                    <img src="assets/images/atardecer2.jpg" alt="Atardecer en San Antero" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/casa.jpeg" alt="Vista de la Casa 1">
+                    <img src="assets/images/casa.jpeg" alt="Vista de la Casa 1" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/casa2.jpeg" alt="Vista de la Casa 2">
+                    <img src="assets/images/casa2.jpeg" alt="Vista de la Casa 2" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/102-2.jpeg" alt="Apartamento 102 Vista 2">
+                    <img src="assets/images/102-2.jpeg" alt="Apartamento 102 Vista 2" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/102-3.jpeg" alt="Apartamento 102 Vista 3">
+                    <img src="assets/images/102-3.jpeg" alt="Apartamento 102 Vista 3" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/201-2.jpeg" alt="Apartamento 201 Vista 2">
+                    <img src="assets/images/201-2.jpeg" alt="Apartamento 201 Vista 2" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/201-3.jpeg" alt="Apartamento 201 Vista 3">
+                    <img src="assets/images/201-3.jpeg" alt="Apartamento 201 Vista 3" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/201-4.jpeg" alt="Apartamento 201 Vista 4">
+                    <img src="assets/images/201-4.jpeg" alt="Apartamento 201 Vista 4" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/201-5.jpeg" alt="Apartamento 201 Vista 5">
+                    <img src="assets/images/201-5.jpeg" alt="Apartamento 201 Vista 5" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/201-6.jpeg" alt="Apartamento 201 Vista 6">
+                    <img src="assets/images/201-6.jpeg" alt="Apartamento 201 Vista 6" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/201-7.jpeg" alt="Apartamento 201 Vista 7">
+                    <img src="assets/images/201-7.jpeg" alt="Apartamento 201 Vista 7" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/202.jpeg" alt="Apartamento 202">
+                    <img src="assets/images/202.jpeg" alt="Apartamento 202" loading="lazy">
                 </div>
             </div>
         </section>
@@ -529,7 +542,7 @@
         </section>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <p>&copy; 2024 Cabañas Mi Pequeño Paraiso. Todos los derechos reservados.</p>
         <div class="social-links">
             <a href="https://www.facebook.com/p/Cabañas-Mi-pequeño-paraíso-Playa-Blanca-100063705289407/" target="_blank" class="social-link">
