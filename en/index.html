@@ -11,12 +11,17 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
         /* Ensure consistent size for images and videos in the gallery */
-        .gallery-item img,
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            max-height: 40vh;
+            object-fit: cover;
+        }
+
         .gallery-item video {
             width: 100%;
             height: auto;
-            max-height: 80vh;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         @media (max-width: 768px) {
@@ -98,29 +103,10 @@
                 <p class="apartment-description">Four cozy studio apartments, perfect for families or groups of friends.</p>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <div class="media-thumbnail" onclick="openGallery('apartment-101')">
-                            <video>
-                                <source src="../images/101.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                    </div>
-                    <!-- Gallery Popup -->
-                    <div id="apartment-101" class="popup-gallery">
-                        <div class="popup-gallery-content">
-                            <span class="popup-gallery-close" onclick="closeGallery('apartment-101')">&times;</span>
-                            <div class="popup-gallery-main">
-                                <button class="gallery-nav prev" onclick="prevMedia('101')">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <div class="media-container">
-                                    <!-- Media items will be loaded here via JavaScript -->
-                                </div>
-                                <button class="gallery-nav next" onclick="nextMedia('101')">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>
+                        <video controls>
+                            <source src="../images/101.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                     <h4>Apartment 101</h4>
                     <div class="features">
@@ -134,17 +120,10 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <img src="../images/102.jpeg" alt="Apartment 102">
                         <video controls>
                             <source src="../images/102.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
-                        <video controls>
-                            <source src="../images/102-2.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <img src="../images/102-2.jpeg" alt="Apartment 102 View 2">
-                        <img src="../images/102-3.jpeg" alt="Apartment 102 View 3">
                     </div>
                     <h4>Apartment 102</h4>
                     <div class="features">
@@ -158,13 +137,8 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <img src="../images/103.jpg" alt="Apartment 103">
                         <video controls>
                             <source src="../images/103.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <video controls>
-                            <source src="../images/103-2.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
@@ -180,13 +154,8 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <img src="../images/104.jpg" alt="Apartment 104">
                         <video controls>
                             <source src="../images/104.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <video controls>
-                            <source src="../images/104-4.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
@@ -207,21 +176,10 @@
                 <p class="apartment-description">Two spacious studio apartments, ideal for large groups or family gatherings.</p>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <img src="../images/201.jpg" alt="Apartment 201">
                         <video controls>
                             <source src="../images/201.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
-                        <video controls>
-                            <source src="../images/201-2.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <img src="../images/201-2.jpeg" alt="Apartment 201 View 2">
-                        <img src="../images/201-3.jpeg" alt="Apartment 201 View 3">
-                        <img src="../images/201-4.jpeg" alt="Apartment 201 View 4">
-                        <img src="../images/201-5.jpeg" alt="Apartment 201 View 5">
-                        <img src="../images/201-6.jpeg" alt="Apartment 201 View 6">
-                        <img src="../images/201-7.jpeg" alt="Apartment 201 View 7">
                     </div>
                     <h4>Apartment 201</h4>
                     <div class="features">
@@ -235,7 +193,6 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <img src="../images/202.jpeg" alt="Apartment 202">
                         <video controls>
                             <source src="../images/202.mp4" type="video/mp4">
                             Your browser does not support the video tag.
@@ -451,32 +408,8 @@
         </section>
 
         <section class="gallery">
-            <h2>Photo Gallery</h2>
+            <h2>Videos</h2>
             <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="../images/pool1.jpg" alt="Main Pool">
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/pool2.jpg" alt="Pool Area">
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/pool3.jpg" alt="Rest Area">
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/pool4.jpg" alt="Pool View">
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/pool5.jpg" alt="Recreational Area">
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/atardecer2.jpg" alt="Sunset in San Antero">
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/casa.jpeg" alt="Casa View 1">
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/casa2.jpeg" alt="Casa View 2">
-                </div>
                 <div class="gallery-item">
                     <video controls>
                         <source src="../images/entrada-casa.mp4" type="video/mp4">
@@ -500,6 +433,75 @@
                         <source src="../images/tintinpan.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery">
+            <h2>Photo Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="../images/pool1.jpg" alt="Main Pool">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/pool2.jpg" alt="Pool Area">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/pool3.jpg" alt="Rest Area">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/pool4.jpg" alt="Pool View">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/pool5.jpg" alt="Recreational Area">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/atardecer2.jpg" alt="Sunset in San Antero">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/casa.jpeg" alt="House View 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/casa2.jpeg" alt="House View 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/102.jpeg" alt="Apartment 102">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/102-2.jpeg" alt="Apartment 102 View 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/102-3.jpeg" alt="Apartment 102 View 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/103.jpeg" alt="Apartment 103">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/104.jpeg" alt="Apartment 104">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/201.jpeg" alt="Apartment 201">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/201-2.jpeg" alt="Apartment 201 View 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/201-3.jpeg" alt="Apartment 201 View 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/201-4.jpeg" alt="Apartment 201 View 4">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/201-5.jpeg" alt="Apartment 201 View 5">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/201-6.jpeg" alt="Apartment 201 View 6">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/201-7.jpeg" alt="Apartment 201 View 7">
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/202.jpeg" alt="Apartment 202">
                 </div>
             </div>
         </section>
@@ -550,7 +552,6 @@
             <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/+573015382699" target="_blank">+57 301 538 2699</a></p>
             <p><i class="fas fa-map-marker-alt"></i> Road to Cispatá Bay, San Antero, Córdoba, Colombia</p>
             <p><i class="fas fa-clock"></i> Open 24/7</p>
-            <p><i class="fas fa-dollar-sign"></i> Price range: Medium</p>
         </div>
     </footer>
 

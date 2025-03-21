@@ -12,12 +12,17 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
         /* Ensure consistent size for images and videos in the gallery */
-        .gallery-item img,
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            max-height: 40vh;
+            object-fit: cover;
+        }
+
         .gallery-item video {
             width: 100%;
             height: auto;
-            max-height: 80vh;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         @media (max-width: 768px) {
@@ -407,32 +412,8 @@
         </section>
 
         <section class="gallery">
-            <h2>Galería de Fotos</h2>
+            <h2>Videos</h2>
             <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="images/pool1.jpg" alt="Piscina Principal">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/pool2.jpg" alt="Área de Piscina">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/pool3.jpg" alt="Zona de Descanso">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/pool4.jpg" alt="Vista de la Piscina">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/pool5.jpg" alt="Área Recreativa">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/atardecer2.jpg" alt="Atardecer en San Antero">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/casa.jpeg" alt="Casa View 1">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/casa2.jpeg" alt="Casa View 2">
-                </div>
                 <div class="gallery-item">
                     <video controls>
                         <source src="images/entrada-casa.mp4" type="video/mp4">
@@ -456,6 +437,75 @@
                         <source src="images/tintinpan.mp4" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery">
+            <h2>Galería de Fotos</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/pool1.jpg" alt="Piscina Principal">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pool2.jpg" alt="Área de Piscina">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pool3.jpg" alt="Zona de Descanso">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pool4.jpg" alt="Vista de la Piscina">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pool5.jpg" alt="Área Recreativa">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/atardecer2.jpg" alt="Atardecer en San Antero">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/casa.jpeg" alt="Vista de la Casa 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/casa2.jpeg" alt="Vista de la Casa 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/102.jpeg" alt="Apartamento 102">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/102-2.jpeg" alt="Apartamento 102 Vista 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/102-3.jpeg" alt="Apartamento 102 Vista 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/103.jpeg" alt="Apartamento 103">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/104.jpeg" alt="Apartamento 104">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/201.jpeg" alt="Apartamento 201">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/201-2.jpeg" alt="Apartamento 201 Vista 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/201-3.jpeg" alt="Apartamento 201 Vista 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/201-4.jpeg" alt="Apartamento 201 Vista 4">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/201-5.jpeg" alt="Apartamento 201 Vista 5">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/201-6.jpeg" alt="Apartamento 201 Vista 6">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/201-7.jpeg" alt="Apartamento 201 Vista 7">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/202.jpeg" alt="Apartamento 202">
                 </div>
             </div>
         </section>
@@ -506,7 +556,6 @@
             <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/+573015382699" target="_blank">+57 301 538 2699</a></p>
             <p><i class="fas fa-map-marker-alt"></i> Vía a Bahía de Cispatá, San Antero, Córdoba, Colombia</p>
             <p><i class="fas fa-clock"></i> Abierto 24/7</p>
-            <p><i class="fas fa-dollar-sign"></i> Rango de precios: Medio</p>
         </div>
     </footer>
 
