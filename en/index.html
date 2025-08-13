@@ -25,6 +25,7 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style">
     <link rel="preload" href="../assets/css/styles.css" as="style">
     <link rel="preload" href="../assets/images/atardecer.jpg" as="image">
+    <link rel="preload" href="../assets/images/casa2.jpeg" as="image">
     <link rel="preload" href="https://unpkg.com/swiper/swiper-bundle.min.css" as="style">
     <link rel="preload" href="https://unpkg.com/swiper/swiper-bundle.min.js" as="script">
     <title>Cabañas Mi Pequeño Paraíso Cottages - Your Paradise in Playa Blanca, San Antero</title>
@@ -67,7 +68,7 @@
     <div class="hero-section" role="region" aria-label="Main presentation">
         <div class="swiper-container" role="region" aria-label="Main image carousel">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" style="background-image: url('../assets/images/beach-background.jpg')">
+                <div class="swiper-slide hero-house" style="background-image: url('../assets/images/casa2.jpeg')">
                     <div class="hero-content">
                         <h1>Cabañas Mi Pequeño Paraíso Cottages</h1>
                         <p class="tagline">Your perfect escape in Playa Blanca, San Antero, Córdoba</p>
@@ -79,9 +80,26 @@
                         <a href="https://wa.me/+573014109986" class="cta-button primary" target="_blank">
                             <i class="fab fa-whatsapp"></i> Book Now
                         </a>
+                        <div class="availability-form">
+                            <form id="availability-form">
+                                <input type="date" name="checkin" aria-label="Check-in date" required>
+                                <input type="date" name="checkout" aria-label="Check-out date" required>
+                                <input type="number" name="guests" min="1" max="20" placeholder="Guests" aria-label="Guests" required>
+                                <select name="apartment" aria-label="Apartment">
+                                    <option value="">Any</option>
+                                    <option value="101">101</option>
+                                    <option value="102">102</option>
+                                    <option value="103">103</option>
+                                    <option value="104">104</option>
+                                    <option value="201">201</option>
+                                    <option value="202">202</option>
+                                </select>
+                                <button type="submit" class="cta-button primary"><i class="fab fa-whatsapp"></i> Ask on WhatsApp</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="swiper-slide" style="background-image: url('../assets/images/jacuzzi.jpg')">
+                <div class="swiper-slide hero-jacuzzi" style="background-image: url('../assets/images/jacuzzi.jpg')">
                     <div class="hero-content">
                         <h1>Jacuzzi with Ocean View</h1>
                         <p class="tagline">Relax in our 10-person jacuzzi</p>
@@ -573,5 +591,9 @@
             },
         });
     </script>
+    <script src="../assets/js/scripts.js"></script>
+    <div class="sticky-cta-mobile">
+        <a href="https://wa.me/+573015382699" target="_blank" class="cta-button primary"><i class="fab fa-whatsapp"></i> Book Now</a>
+    </div>
 </body>
 </html> 

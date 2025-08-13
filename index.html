@@ -25,6 +25,7 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style">
     <link rel="preload" href="assets/css/styles.css" as="style">
     <link rel="preload" href="assets/images/atardecer.jpg" as="image">
+    <link rel="preload" href="assets/images/casa2.jpeg" as="image">
     <link rel="preload" href="https://unpkg.com/swiper/swiper-bundle.min.css" as="style">
     <link rel="preload" href="https://unpkg.com/swiper/swiper-bundle.min.js" as="script">
     <title>Cabañas Mi Pequeño Paraíso - Tu Paraíso en Playa Blanca, San Antero</title>
@@ -69,7 +70,7 @@
         <!-- Slider main container -->
         <div class="swiper-container" role="region" aria-label="Carrusel de imágenes principales">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" style="background-image: url('assets/images/beach-background.jpg')">
+                <div class="swiper-slide hero-house" style="background-image: url('assets/images/casa2.jpeg')">
                     <div class="hero-content">
                         <h1>Cabañas Mi Pequeño Paraíso</h1>
                         <p class="tagline">Tu escape perfecto en Playa Blanca, San Antero, Córdoba</p>
@@ -81,9 +82,26 @@
                         <a href="https://wa.me/+573014109986" class="cta-button primary" target="_blank">
                             <i class="fab fa-whatsapp"></i> Reserva Ahora
                         </a>
+                        <div class="availability-form">
+                            <form id="availability-form">
+                                <input type="date" name="checkin" aria-label="Fecha de llegada" required>
+                                <input type="date" name="checkout" aria-label="Fecha de salida" required>
+                                <input type="number" name="guests" min="1" max="20" placeholder="Huéspedes" aria-label="Número de huéspedes" required>
+                                <select name="apartment" aria-label="Apartamento">
+                                    <option value="">Cualquiera</option>
+                                    <option value="101">101</option>
+                                    <option value="102">102</option>
+                                    <option value="103">103</option>
+                                    <option value="104">104</option>
+                                    <option value="201">201</option>
+                                    <option value="202">202</option>
+                                </select>
+                                <button type="submit" class="cta-button primary"><i class="fab fa-whatsapp"></i> Consultar por WhatsApp</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="swiper-slide" style="background-image: url('assets/images/jacuzzi.jpg')">
+                <div class="swiper-slide hero-jacuzzi" style="background-image: url('assets/images/jacuzzi.jpg')">
                     <div class="hero-content">
                         <h1>Jacuzzi</h1>
                         <p class="tagline">Relájate en nuestro jacuzzi de 10 personas</p>
@@ -556,6 +574,10 @@
     <!-- Add scripts before closing body tag -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/scripts.js"></script>
+    <div class="sticky-cta-mobile">
+        <a href="https://wa.me/+573015382699" target="_blank" class="cta-button primary"><i class="fab fa-whatsapp"></i> Reserva Ahora</a>
+    </div>
     <script>
         // Popup Gallery Functions
         function openGallery(galleryId) {

@@ -69,16 +69,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if ('loading' in HTMLImageElement.prototype) {
         // Browser supports native lazy loading
-        lazyImages.forEach(img => {
-            img.src = img.dataset.src;
-        });
+        // No need to do anything as src is already set
+        console.log('Native lazy loading is supported');
     } else {
         // Fallback for browsers that don't support lazy loading
         const imageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    img.src = img.dataset.src;
+                    // Only set src from data-src if it exists
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                    }
                     observer.unobserve(img);
                 }
             });
@@ -94,44 +96,44 @@ document.addEventListener('DOMContentLoaded', function() {
 let currentMediaIndex = 0;
 const mediaGalleries = {
     '101': [
-        { type: 'video', src: '../images/101.mp4' },
-        { type: 'image', src: '../images/101.jpg' },
-        { type: 'image', src: '../images/101-2.jpg' },
-        { type: 'image', src: '../images/101-3.jpg' }
+        { type: 'video', src: '../assets/images/101.mp4' },
+        { type: 'image', src: '../assets/images/101.jpg' },
+        { type: 'image', src: '../assets/images/101-2.jpg' },
+        { type: 'image', src: '../assets/images/101-3.jpg' }
     ],
     '102': [
-        { type: 'video', src: '../images/102.mp4' },
-        { type: 'image', src: '../images/102.jpeg' },
-        { type: 'video', src: '../images/102-2.mp4' },
-        { type: 'image', src: '../images/102-2.jpeg' },
-        { type: 'image', src: '../images/102-3.jpeg' }
+        { type: 'video', src: '../assets/images/102.mp4' },
+        { type: 'image', src: '../assets/images/102.jpeg' },
+        { type: 'video', src: '../assets/images/102-2.mp4' },
+        { type: 'image', src: '../assets/images/102-2.jpeg' },
+        { type: 'image', src: '../assets/images/102-3.jpeg' }
     ],
     '103': [
-        { type: 'video', src: '../images/103.mp4' },
-        { type: 'image', src: '../images/103.jpg' },
-        { type: 'video', src: '../images/103-2.mp4' },
-        { type: 'image', src: '../images/103-2.jpg' }
+        { type: 'video', src: '../assets/images/103.mp4' },
+        { type: 'image', src: '../assets/images/103.jpg' },
+        { type: 'video', src: '../assets/images/103-2.mp4' },
+        { type: 'image', src: '../assets/images/103-2.jpg' }
     ],
     '104': [
-        { type: 'video', src: '../images/104.mp4' },
-        { type: 'image', src: '../images/104.jpg' },
-        { type: 'video', src: '../images/104-4.mp4' },
-        { type: 'image', src: '../images/104-2.jpg' }
+        { type: 'video', src: '../assets/images/104.mp4' },
+        { type: 'image', src: '../assets/images/104.jpg' },
+        { type: 'video', src: '../assets/images/104-4.mp4' },
+        { type: 'image', src: '../assets/images/104-2.jpg' }
     ],
     '201': [
-        { type: 'video', src: '../images/201.mp4' },
-        { type: 'image', src: '../images/201.jpg' },
-        { type: 'video', src: '../images/201-2.mp4' },
-        { type: 'image', src: '../images/201-2.jpeg' },
-        { type: 'image', src: '../images/201-3.jpeg' },
-        { type: 'image', src: '../images/201-4.jpeg' },
-        { type: 'image', src: '../images/201-5.jpeg' },
-        { type: 'image', src: '../images/201-6.jpeg' },
-        { type: 'image', src: '../images/201-7.jpeg' }
+        { type: 'video', src: '../assets/images/201.mp4' },
+        { type: 'image', src: '../assets/images/201.jpg' },
+        { type: 'video', src: '../assets/images/201-2.mp4' },
+        { type: 'image', src: '../assets/images/201-2.jpeg' },
+        { type: 'image', src: '../assets/images/201-3.jpeg' },
+        { type: 'image', src: '../assets/images/201-4.jpeg' },
+        { type: 'image', src: '../assets/images/201-5.jpeg' },
+        { type: 'image', src: '../assets/images/201-6.jpeg' },
+        { type: 'image', src: '../assets/images/201-7.jpeg' }
     ],
     '202': [
-        { type: 'video', src: '../images/202.mp4' },
-        { type: 'image', src: '../images/202.jpeg' }
+        { type: 'video', src: '../assets/images/202.mp4' },
+        { type: 'image', src: '../assets/images/202.jpeg' }
     ]
 }; 
 
@@ -162,20 +164,31 @@ function closeGallery(galleryId) {
 function updateMediaDisplay(apartmentId) {
     console.log(`Updating media display for apartment: ${apartmentId}, index: ${currentMediaIndex}`);
     const mediaContainer = document.querySelector(`#apartment-${apartmentId} .media-container`);
-    const currentMedia = mediaGalleries[apartmentId][currentMediaIndex];
+    const currentMedia = mediaGalleries[apartmentId]?.[currentMediaIndex];
     
-    if (currentMedia && mediaContainer) {
-        if (currentMedia.type === 'video') {
-            mediaContainer.innerHTML = `
-                <video controls>
-                    <source src="${currentMedia.src}" type="video/mp4">
-                    Your browser does not support video.
-                </video>`;
-        } else {
-            mediaContainer.innerHTML = `<img src="${currentMedia.src}" alt="Apartment ${apartmentId}">`;
-        }
+    if (!mediaContainer) {
+        console.error(`Media container not found for apartment: ${apartmentId}`);
+        return;
+    }
+    
+    if (!currentMedia) {
+        console.error(`Media not found for apartment: ${apartmentId} at index: ${currentMediaIndex}`);
+        return;
+    }
+    
+    if (!currentMedia.src) {
+        console.error(`Media source is undefined for apartment: ${apartmentId} at index: ${currentMediaIndex}`, currentMedia);
+        return;
+    }
+    
+    if (currentMedia.type === 'video') {
+        mediaContainer.innerHTML = `
+            <video controls>
+                <source src="${currentMedia.src}" type="video/mp4">
+                Your browser does not support video.
+            </video>`;
     } else {
-        console.error(`Media not found for apartment: ${apartmentId}, index: ${currentMediaIndex}`);
+        mediaContainer.innerHTML = `<img src="${currentMedia.src}" alt="Apartment ${apartmentId}">`;
     }
 }
 
@@ -206,6 +219,20 @@ document.addEventListener('keydown', function(event) {
 
 // Initialize galleries when document is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Validate media galleries data
+    Object.entries(mediaGalleries).forEach(([apartmentId, media]) => {
+        if (!Array.isArray(media)) {
+            console.error(`Invalid media array for apartment ${apartmentId}`);
+            return;
+        }
+        
+        media.forEach((item, index) => {
+            if (!item || !item.type || !item.src) {
+                console.error(`Invalid media item for apartment ${apartmentId} at index ${index}:`, item);
+            }
+        });
+    });
+
     Object.keys(mediaGalleries).forEach(apartmentId => {
         const apartmentElement = document.querySelector(`#apartment-${apartmentId}`);
         if (apartmentElement) {
@@ -219,7 +246,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         openGallery(`apartment-${apartmentId}`);
                     }
                 });
+            } else {
+                console.error(`Media container not found for apartment ${apartmentId}`);
             }
+        } else {
+            console.error(`Apartment element not found: #apartment-${apartmentId}`);
         }
     });
 }); 

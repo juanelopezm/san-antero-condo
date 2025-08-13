@@ -56,7 +56,8 @@ header {
     padding-top: 60px; /* Add padding to account for fixed header */
     position: relative;
     overflow: hidden;
-    background: #000;
+    background: url('../assets/images/beach-background.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
 .swiper-container {
@@ -80,8 +81,18 @@ header {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.35);
     z-index: 1;
+}
+
+/* Slightly lighter overlay for the first hero house slide to keep it vibrant */
+.swiper-slide.hero-house::before {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+/* Avoid cutting the bottom of the jacuzzi image */
+.swiper-slide.hero-jacuzzi {
+    background-position: bottom center;
 }
 
 .hero-content {
@@ -151,6 +162,31 @@ header {
     transform: translateY(-2px);
 }
 
+/* Availability form in hero */
+.availability-form {
+    margin-top: 1rem;
+}
+
+.availability-form form {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.availability-form input[type="date"],
+.availability-form input[type="number"] {
+    padding: 0.8rem 0.9rem;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.85);
+    min-width: 160px;
+}
+
+.availability-form .cta-button {
+    padding: 0.9rem 1.4rem;
+}
+
 /* Swiper Navigation */
 .swiper-button-next,
 .swiper-button-prev {
@@ -195,13 +231,13 @@ header {
 body {
     margin: 0;
     padding: 0;
-    background: url('../images/beach-background.jpg') no-repeat center center fixed;
+    background: url('../assets/images/beach-background.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
 /* Header and Hero Section */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/beach-header.jpg') no-repeat center center;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/images/beach-header.jpg') no-repeat center center;
     background-size: cover;
     height: 100vh;
     display: flex;
@@ -800,6 +836,61 @@ footer p {
     .gallery-item video {
         max-height: 280px;
     }
+}
+
+/* Floating WhatsApp button */
+.whatsapp-float {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #25D366;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1100;
+}
+
+.whatsapp-float i {
+    font-size: 28px;
+}
+
+@media (max-width: 768px) {
+    .whatsapp-float {
+        right: 16px;
+        bottom: 16px;
+        width: 52px;
+        height: 52px;
+    }
+}
+
+/* Sticky mobile CTA bar */
+.sticky-cta-mobile {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 0.6rem 1rem;
+    display: none;
+    z-index: 1090;
+}
+
+.sticky-cta-mobile .cta-button {
+    width: 100%;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .sticky-cta-mobile { display: block; }
+    body { padding-bottom: 64px; }
 }
 
 @media (max-width: 1024px) {
