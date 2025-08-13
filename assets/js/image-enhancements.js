@@ -5,31 +5,31 @@
     // Enhanced media galleries with more images per apartment
     const enhancedMediaGalleries = {
         '101': [
-            { type: 'video', src: 'assets/images/101.mp4', thumb: 'assets/images/101-thumb.jpg' },
+            { type: 'video', src: 'assets/images/101.mp4', thumb: 'assets/images/casa.jpeg' },
             { type: 'image', src: 'assets/images/casa.jpeg', thumb: 'assets/images/casa.jpeg' },
             { type: 'image', src: 'assets/images/casa2.jpeg', thumb: 'assets/images/casa2.jpeg' },
             { type: 'image', src: 'assets/images/terraza.jpeg', thumb: 'assets/images/terraza.jpeg' }
         ],
         '102': [
-            { type: 'video', src: 'assets/images/102.mp4', thumb: 'assets/images/102-thumb.jpg' },
+            { type: 'video', src: 'assets/images/102.mp4', thumb: 'assets/images/102-2.jpeg' },
             { type: 'video', src: 'assets/images/102-2.mp4', thumb: 'assets/images/102-2.jpeg' },
             { type: 'image', src: 'assets/images/102-2.jpeg', thumb: 'assets/images/102-2.jpeg' },
             { type: 'image', src: 'assets/images/102-3.jpeg', thumb: 'assets/images/102-3.jpeg' }
         ],
         '103': [
-            { type: 'video', src: 'assets/images/103.mp4', thumb: 'assets/images/103-thumb.jpg' },
-            { type: 'video', src: 'assets/images/103-2.mp4', thumb: 'assets/images/103-2.jpeg' },
+            { type: 'video', src: 'assets/images/103.mp4', thumb: 'assets/images/pool1.jpg' },
+            { type: 'video', src: 'assets/images/103-2.mp4', thumb: 'assets/images/pool2.jpg' },
             { type: 'image', src: 'assets/images/pool1.jpg', thumb: 'assets/images/pool1.jpg' },
             { type: 'image', src: 'assets/images/pool2.jpg', thumb: 'assets/images/pool2.jpg' }
         ],
         '104': [
-            { type: 'video', src: 'assets/images/104.mp4', thumb: 'assets/images/104-thumb.jpg' },
-            { type: 'video', src: 'assets/images/104-4.mp4', thumb: 'assets/images/104-4.jpeg' },
+            { type: 'video', src: 'assets/images/104.mp4', thumb: 'assets/images/pool3.jpg' },
+            { type: 'video', src: 'assets/images/104-4.mp4', thumb: 'assets/images/pool4.jpg' },
             { type: 'image', src: 'assets/images/pool3.jpg', thumb: 'assets/images/pool3.jpg' },
             { type: 'image', src: 'assets/images/pool4.jpg', thumb: 'assets/images/pool4.jpg' }
         ],
         '201': [
-            { type: 'video', src: 'assets/images/201.mp4', thumb: 'assets/images/201-thumb.jpg' },
+            { type: 'video', src: 'assets/images/201.mp4', thumb: 'assets/images/201-2.jpeg' },
             { type: 'video', src: 'assets/images/201-2.mp4', thumb: 'assets/images/201-2.jpeg' },
             { type: 'image', src: 'assets/images/201-2.jpeg', thumb: 'assets/images/201-2.jpeg' },
             { type: 'image', src: 'assets/images/201-3.jpeg', thumb: 'assets/images/201-3.jpeg' },
@@ -39,7 +39,7 @@
             { type: 'image', src: 'assets/images/201-7.jpeg', thumb: 'assets/images/201-7.jpeg' }
         ],
         '202': [
-            { type: 'video', src: 'assets/images/202.mp4', thumb: 'assets/images/202-thumb.jpg' },
+            { type: 'video', src: 'assets/images/202.mp4', thumb: 'assets/images/202.jpeg' },
             { type: 'image', src: 'assets/images/202.jpeg', thumb: 'assets/images/202.jpeg' },
             { type: 'image', src: 'assets/images/pool5.jpg', thumb: 'assets/images/pool5.jpg' },
             { type: 'image', src: 'assets/images/jacuzzi.jpg', thumb: 'assets/images/jacuzzi.jpg' }
@@ -84,21 +84,15 @@
     }
 
     function openLightbox(apartmentId, startIndex = 0) {
-        console.log(`openLightbox called with apartmentId: ${apartmentId}, startIndex: ${startIndex}`);
-        
         createLightboxOverlay();
         currentLightboxGallery = enhancedMediaGalleries[apartmentId] || [];
         currentLightboxIndex = startIndex;
         
-        console.log(`Gallery for ${apartmentId}:`, currentLightboxGallery);
-        
         if (currentLightboxGallery.length === 0) {
-            console.warn(`No media found for apartment ${apartmentId}`);
             return;
         }
         
         if (!lightboxOverlay) {
-            console.error('Lightbox overlay not created');
             return;
         }
         
@@ -107,8 +101,6 @@
         
         updateLightboxContent();
         createLightboxThumbnails();
-        
-        console.log('Lightbox opened successfully');
         
         // Track analytics
         if (window.dataLayer) {
@@ -252,7 +244,6 @@
             const apartmentElement = document.querySelector(`[data-apartment="${apartmentId}"]`);
             
             if (!apartmentElement) {
-                console.warn(`Apartment element not found for ID: ${apartmentId}`);
                 return;
             }
             
@@ -262,7 +253,6 @@
             // Add click handler to open lightbox
             mediaGallery.addEventListener('click', (e) => {
                 e.preventDefault();
-                console.log(`Opening lightbox for apartment ${apartmentId}`);
                 openLightbox(apartmentId, 0);
             });
             
@@ -306,9 +296,6 @@
 
     // Initialize all enhancements
     function init() {
-        console.log('Initializing image enhancements...');
-        console.log('Enhanced media galleries:', enhancedMediaGalleries);
-        
         setupProgressiveLoading();
         enhanceApartmentGalleries();
         addParallaxEffect();
