@@ -112,6 +112,23 @@
         }
     }
 
+    // Open lightbox with an arbitrary media array (used for standalone galleries)
+    function openMediaLightbox(mediaArray, startIndex = 0) {
+        createLightboxOverlay();
+        currentLightboxGallery = Array.isArray(mediaArray) ? mediaArray : [];
+        currentLightboxIndex = startIndex;
+
+        if (currentLightboxGallery.length === 0 || !lightboxOverlay) {
+            return;
+        }
+
+        lightboxOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        updateLightboxContent();
+        createLightboxThumbnails();
+    }
+
     function closeLightbox() {
         if (!lightboxOverlay) return;
         
@@ -281,6 +298,35 @@
         });
     }
 
+    // Enhance general gallery sections (videos and photos sections)
+    function enhanceStandaloneGalleries() {
+        const gallerySections = document.querySelectorAll('section.gallery');
+
+        gallerySections.forEach(section => {
+            const mediaElements = Array.from(section.querySelectorAll('.gallery-item img, .gallery-item video'));
+            if (mediaElements.length === 0) return;
+
+            // Build media array for this section
+            const mediaArray = mediaElements.map(el => {
+                if (el.tagName === 'VIDEO') {
+                    const source = el.querySelector('source');
+                    return { type: 'video', src: source ? source.src : (el.currentSrc || el.src) };
+                }
+                return { type: 'image', src: el.currentSrc || el.src };
+            });
+
+            // Attach click handlers with proper index
+            mediaElements.forEach((el, index) => {
+                el.style.cursor = 'pointer';
+                el.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openMediaLightbox(mediaArray, index);
+                }, { passive: false });
+            });
+        });
+    }
+
     // Add parallax effect to hero slides
     function addParallaxEffect() {
         const heroSlides = document.querySelectorAll('.swiper-slide');
@@ -304,6 +350,7 @@
     function init() {
         setupProgressiveLoading();
         enhanceApartmentGalleries();
+        enhanceStandaloneGalleries();
         // addParallaxEffect(); // Temporarily disabled to check background images
         
         // Add progressive loading class to existing images
@@ -333,6 +380,7 @@
     // Export functions for external use
     window.ImageEnhancements = {
         openLightbox,
-        closeLightbox
+        closeLightbox,
+        openMediaLightbox
     };
 })();
