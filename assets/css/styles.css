@@ -94,20 +94,23 @@ header {
 
 /* Avoid cutting the bottom of the jacuzzi image */
 .swiper-slide.hero-jacuzzi {
-    background-position: center bottom;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
     align-items: flex-end;
 }
 
 .swiper-slide.hero-jacuzzi .hero-content {
-    margin-bottom: 12vh;
+    margin-bottom: 8vh;
 }
 
 @media (max-width: 768px) {
     .swiper-slide.hero-jacuzzi {
-        background-position: center bottom;
+        background-size: contain;
+        background-position: center center;
     }
     .swiper-slide.hero-jacuzzi .hero-content {
-        margin-bottom: 16vh;
+        margin-bottom: 10vh;
     }
 }
 
