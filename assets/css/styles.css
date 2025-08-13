@@ -1,10 +1,12 @@
 /* Reset and Base Styles */
 :root {
-    --primary-color: #007bff;
-    --secondary-color: #17a2b8;
-    --text-color: #333;
-    --light-bg: #f8f9fa;
-    --dark-bg: #343a40;
+    --primary-color: #0ea5e9; /* Caribbean blue */
+    --secondary-color: #22c55e; /* Emerald */
+    --accent-color: #f59e0b; /* Amber */
+    --text-color: #1f2937;
+    --muted-text: #6b7280;
+    --light-bg: #f8fafc;
+    --dark-bg: #0b1220;
 }
 
 * {
@@ -14,7 +16,7 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     line-height: 1.6;
     color: var(--text-color);
 }
@@ -92,7 +94,21 @@ header {
 
 /* Avoid cutting the bottom of the jacuzzi image */
 .swiper-slide.hero-jacuzzi {
-    background-position: bottom center;
+    background-position: center bottom;
+    align-items: flex-end;
+}
+
+.swiper-slide.hero-jacuzzi .hero-content {
+    margin-bottom: 12vh;
+}
+
+@media (max-width: 768px) {
+    .swiper-slide.hero-jacuzzi {
+        background-position: center bottom;
+    }
+    .swiper-slide.hero-jacuzzi .hero-content {
+        margin-bottom: 16vh;
+    }
 }
 
 .hero-content {
@@ -112,7 +128,8 @@ header {
 }
 
 .hero-content h1 {
-    font-size: 4rem;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    font-size: 3.5rem;
     margin-bottom: 1.5rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -155,12 +172,12 @@ header {
 }
 
 .cta-button.primary {
-    background: #25D366;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
     color: white;
 }
 
 .cta-button.primary:hover {
-    background: #128C7E;
+    filter: brightness(1.05);
     transform: translateY(-2px);
 }
 
@@ -427,12 +444,12 @@ h2 {
     background: white;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
     transition: transform 0.3s ease;
 }
 
 .apartment:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
 }
 
 .apartment img,
@@ -468,7 +485,7 @@ h2 {
 }
 
 .apartment-type.highlight {
-    background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+    background: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0.9));
     padding: 3rem 2rem;
     text-align: center;
 }
@@ -530,8 +547,8 @@ h2 {
 }
 
 .feature-item i {
-    font-size: 2rem;
-    color: var(--primary-color);
+    font-size: 2.2rem;
+    color: var(--accent-color);
     margin-bottom: 1rem;
 }
 
@@ -582,10 +599,10 @@ h2 {
 }
 
 .amenities-column {
-    background: white;
+    background: rgba(255,255,255,0.9);
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.06);
 }
 
 .amenities-column h3 {
@@ -751,7 +768,7 @@ h2 {
 
 /* Footer */
 footer {
-    background: rgba(0, 0, 0, 0.8);
+    background: linear-gradient(180deg, rgba(2,6,23,1), rgba(2,6,23,0.9));
     color: white;
     text-align: center;
     padding: 2rem;
