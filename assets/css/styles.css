@@ -57,6 +57,7 @@ header {
     min-height: 100vh;
     padding-top: 60px; /* Add padding to account for fixed header */
     position: relative;
+    z-index: 0; /* Ensure hero sits below main content stacking */
     overflow: hidden;
     background: #000;
 }
@@ -422,6 +423,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+    position: relative; /* ensure above hero overlay */
+    z-index: 3;
 }
 
 section {

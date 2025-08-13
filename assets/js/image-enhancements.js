@@ -250,11 +250,15 @@
             const mediaGallery = apartmentElement.querySelector('.media-gallery');
             if (!mediaGallery) return;
             
-            // Add click handler to open lightbox
+            // Add click handlers to images/videos to open lightbox
             mediaGallery.addEventListener('click', (e) => {
-                e.preventDefault();
-                openLightbox(apartmentId, 0);
-            });
+                const target = e.target;
+                if (target && (target.tagName === 'IMG' || target.tagName === 'VIDEO' || target.closest('video'))) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openLightbox(apartmentId, 0);
+                }
+            }, { passive: false });
             
             // Add thumbnails below main media
             const thumbnailsContainer = document.createElement('div');
