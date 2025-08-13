@@ -84,17 +84,31 @@
     }
 
     function openLightbox(apartmentId, startIndex = 0) {
+        console.log(`openLightbox called with apartmentId: ${apartmentId}, startIndex: ${startIndex}`);
+        
         createLightboxOverlay();
         currentLightboxGallery = enhancedMediaGalleries[apartmentId] || [];
         currentLightboxIndex = startIndex;
         
-        if (currentLightboxGallery.length === 0) return;
+        console.log(`Gallery for ${apartmentId}:`, currentLightboxGallery);
+        
+        if (currentLightboxGallery.length === 0) {
+            console.warn(`No media found for apartment ${apartmentId}`);
+            return;
+        }
+        
+        if (!lightboxOverlay) {
+            console.error('Lightbox overlay not created');
+            return;
+        }
         
         lightboxOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
         
         updateLightboxContent();
         createLightboxThumbnails();
+        
+        console.log('Lightbox opened successfully');
         
         // Track analytics
         if (window.dataLayer) {
@@ -235,11 +249,12 @@
     // Enhanced apartment galleries
     function enhanceApartmentGalleries() {
         Object.keys(enhancedMediaGalleries).forEach(apartmentId => {
-            const apartmentElement = document.querySelector(`[data-apartment="${apartmentId}"]`) ||
-                                   document.querySelector(`h4:contains("Apartamento ${apartmentId}")`)?.closest('.apartment') ||
-                                   document.querySelector(`h4:contains("Apartment ${apartmentId}")`)?.closest('.apartment');
+            const apartmentElement = document.querySelector(`[data-apartment="${apartmentId}"]`);
             
-            if (!apartmentElement) return;
+            if (!apartmentElement) {
+                console.warn(`Apartment element not found for ID: ${apartmentId}`);
+                return;
+            }
             
             const mediaGallery = apartmentElement.querySelector('.media-gallery');
             if (!mediaGallery) return;
@@ -247,6 +262,7 @@
             // Add click handler to open lightbox
             mediaGallery.addEventListener('click', (e) => {
                 e.preventDefault();
+                console.log(`Opening lightbox for apartment ${apartmentId}`);
                 openLightbox(apartmentId, 0);
             });
             
@@ -290,6 +306,9 @@
 
     // Initialize all enhancements
     function init() {
+        console.log('Initializing image enhancements...');
+        console.log('Enhanced media galleries:', enhancedMediaGalleries);
+        
         setupProgressiveLoading();
         enhanceApartmentGalleries();
         addParallaxEffect();
