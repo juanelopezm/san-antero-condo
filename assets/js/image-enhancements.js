@@ -296,15 +296,16 @@
         
         // Add progressive loading class to existing images
         document.querySelectorAll('.gallery-item img, .apartment img').forEach(img => {
-            if (!img.classList.contains('loaded')) {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'progressive-img';
-                img.parentNode.insertBefore(wrapper, img);
-                wrapper.appendChild(img);
+            if (!img.classList.contains('loaded') && img.src) {
+                // Mark existing loaded images as loaded
+                img.classList.add('loaded');
                 
-                if (img.complete) {
-                    img.classList.add('loaded');
-                    wrapper.classList.add('loaded');
+                // Wrap in progressive container for styling
+                if (!img.closest('.progressive-img')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'progressive-img loaded';
+                    img.parentNode.insertBefore(wrapper, img);
+                    wrapper.appendChild(img);
                 }
             }
         });
