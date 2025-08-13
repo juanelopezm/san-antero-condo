@@ -283,12 +283,14 @@
         
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
+            const rate = scrolled * -0.3; // Reduced parallax intensity
             
             heroSlides.forEach(slide => {
-                if (slide.getBoundingClientRect().top < window.innerHeight && 
-                    slide.getBoundingClientRect().bottom > 0) {
-                    slide.style.transform = `translateY(${rate}px)`;
+                // Only apply parallax if the slide is in the viewport
+                const rect = slide.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    // Apply transform to background only, not the entire slide
+                    slide.style.backgroundPosition = `center ${50 + rate * 0.1}%`;
                 }
             });
         });
@@ -298,7 +300,7 @@
     function init() {
         setupProgressiveLoading();
         enhanceApartmentGalleries();
-        addParallaxEffect();
+        // addParallaxEffect(); // Temporarily disabled to check background images
         
         // Add progressive loading class to existing images
         document.querySelectorAll('.gallery-item img, .apartment img').forEach(img => {
