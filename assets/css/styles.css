@@ -94,7 +94,7 @@ header {
 /* Avoid cutting the bottom of the jacuzzi image */
 .swiper-slide.hero-jacuzzi {
     background-size: cover;
-    background-position: center 85%;
+    background-position: center 55%;
     align-items: flex-end;
 }
 
@@ -105,7 +105,7 @@ header {
 @media (max-width: 768px) {
     .swiper-slide.hero-jacuzzi {
         background-size: cover;
-        background-position: center 90%;
+        background-position: center 60%;
     }
     .swiper-slide.hero-jacuzzi .hero-content {
         margin-bottom: 10vh;
