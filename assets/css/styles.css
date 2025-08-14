@@ -767,6 +767,7 @@ h2 {
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 1;
+    pointer-events: none;
 }
 
 .gallery-item:hover::before {
@@ -783,6 +784,7 @@ h2 {
     color: white;
     z-index: 2;
     transition: transform 0.3s ease;
+    pointer-events: none;
 }
 
 .gallery-item:hover::after {
