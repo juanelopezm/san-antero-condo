@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Site invariants (scripts/verify.mjs)
+        run: node scripts/verify.mjs
+      - name: HTML validation
+        run: npx --yes html-validate@8 index.html en/index.html
+        # PRD-005: pre-existing markup issues may fail here at first.
+        # Fix them (don't silence the step) as part of PRD-005.
+        continue-on-error: true

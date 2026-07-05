@@ -1,0 +1,13 @@
+{
+  "name": "san-antero-condo",
+  "private": true,
+  "description": "Static bilingual marketing site for Cabañas Mi Pequeño Paraíso — no build step, these scripts are the quality gate.",
+  "type": "module",
+  "scripts": {
+    "serve": "bash scripts/serve.sh",
+    "verify": "node scripts/verify.mjs",
+    "lint:html": "npx --yes html-validate@8 index.html en/index.html",
+    "lint:css": "npx --yes stylelint@16 --config .stylelintrc.json \"assets/css/*.css\"",
+    "check": "npm run verify && npm run lint:html"
+  }
+}
