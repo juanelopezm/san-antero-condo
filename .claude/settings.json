@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node scripts/verify.mjs)",
+      "Bash(bash scripts/serve.sh:*)",
+      "Bash(npm run verify)",
+      "Bash(npm run check)",
+      "Bash(npm run lint:html)",
+      "Bash(npm run lint:css)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)"
+    ]
+  }
+}

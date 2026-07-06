@@ -1,0 +1,21 @@
+name: Weekly link check
+
+on:
+  schedule:
+    - cron: "0 12 * * 1" # Mondays 12:00 UTC
+  workflow_dispatch:
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check live site links
+        run: >
+          npx --yes linkinator
+          https://juanelopezm.github.io/san-antero-condo/
+          --recurse --skip "wa.me|whatsapp.com" --verbosity error

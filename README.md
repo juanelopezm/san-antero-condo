@@ -2,6 +2,15 @@
 
 A beautiful website showcasing luxury condo rentals in San Antero, Colombia. Built with HTML, CSS, and JavaScript.
 
+## Development & roadmap
+
+- Product vision: [`docs/PRODUCT.md`](docs/PRODUCT.md) · Work queue: [`docs/BACKLOG.md`](docs/BACKLOG.md) · PRDs: [`docs/prds/`](docs/prds/)
+- Preview locally: `bash scripts/serve.sh` → http://localhost:8080/ and `/en/`
+- Quality gate (run before every commit): `node scripts/verify.mjs`
+- Agent workflow: see [`CLAUDE.md`](CLAUDE.md); slash commands `/prd-next`, `/prd-verify`, `/prd-status`
+
+> Note: the "Project Structure" and S3 sections below are outdated; correcting them is tracked in [PRD-008](docs/prds/PRD-008-content-trust.md).
+
 ## Features
 - Responsive design
 - Bilingual support (English/Spanish)
