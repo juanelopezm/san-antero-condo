@@ -10,7 +10,7 @@ priority band unless dependencies force otherwise.
 | [PRD-004](prds/PRD-004-booking-funnel.md) | Booking funnel hardening | P0 | PRD-001 | In progress (phone/validation/how-to-book done; pricing blocked on owner data) | |
 | [PRD-002](prds/PRD-002-media-performance.md) | Media and performance optimization | P0 | PRD-001 | Done (Lighthouse score unmeasurable in this sandbox — see PRD notes) | |
 | [PRD-005](prds/PRD-005-quality-ci.md) | Quality tooling and CI | P0 | — | Done | |
-| [PRD-003](prds/PRD-003-seo-discoverability.md) | SEO and discoverability | P1 | — | Not started | |
+| [PRD-003](prds/PRD-003-seo-discoverability.md) | SEO and discoverability | P1 | — | Done | |
 | [PRD-006](prds/PRD-006-accessibility.md) | Accessibility (WCAG 2.1 AA) | P1 | PRD-001 | Not started | |
 | [PRD-007](prds/PRD-007-analytics.md) | Analytics and conversion measurement | P2 | PRD-004 | Not started | |
 | [PRD-008](prds/PRD-008-content-trust.md) | Content accuracy and trust | P2 | — | Not started | |
@@ -37,3 +37,15 @@ in your completion summary.
 - [ ] Analytics choice: GA4 (recommended) vs GoatCounter, and who owns the account (PRD-007)
 - [ ] 2–3 recent attributable guest reviews (PRD-008)
 - [ ] Confirm tour destinations: Islas de San Bernardo / Múcura / Tintipán naming (PRD-008)
+- [ ] Register `sitemap.xml` with Google Search Console / Bing Webmaster Tools once PRD-003 is live — agents can't do this, needs the owner's Google/Microsoft account (PRD-003, done otherwise)
+
+## Known debt (not blocking, flagged for a future pass)
+
+- `assets/css/styles.css` has several genuine duplicate selectors (`body`,
+  `.apartment`, `.gallery-nav`, `.popup-gallery`, others) — `stylelint`'s
+  `no-duplicate-selectors` rule is disabled rather than auto-merged, since
+  collapsing them risks silently changing which declaration wins. (found in PRD-005)
+- The shared `.cta-button` class used *without* `.primary` (8 places across both
+  pages) has no color of its own and falls back to default link-blue — invisible
+  on light backgrounds, visibly broken on dark ones. `404.html` patches around it
+  locally; the underlying shared rule hasn't been audited. (found in PRD-003)

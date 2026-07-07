@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://juanelopezm.github.io/san-antero-condo/sitemap.xml

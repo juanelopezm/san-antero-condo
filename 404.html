@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+    <title>Página no encontrada · Page not found — Cabañas Mi Pequeño Paraíso</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="assets/css/styles.css?v=5">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .not-found {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark-bg);
+            color: #fff;
+        }
+        .not-found h1 {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .not-found p {
+            max-width: 480px;
+            margin: 0.5rem 0 1.5rem;
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+        .not-found .lang-block {
+            margin-bottom: 2.5rem;
+        }
+        .not-found .lang-block:last-of-type {
+            margin-bottom: 2rem;
+        }
+        .not-found .cta-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        /* The shared .cta-button (no .primary) has no color of its own site-wide —
+           it inherits default link blue, which reads as "unstyled" on this page's
+           dark background. Give it real button styling here rather than touch the
+           shared rule (used bare in 8 other places whose context we haven't audited). */
+        .not-found .cta-button:not(.primary) {
+            border: 2px solid #fff;
+            color: #fff;
+        }
+        .not-found .cta-button:not(.primary):hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+    </style>
+</head>
+<body>
+    <div class="not-found">
+        <h1>404</h1>
+
+        <div class="lang-block">
+            <p><strong>Página no encontrada.</strong> El enlace que seguiste puede estar roto o la página se movió.</p>
+            <div class="cta-row">
+                <a href="index.html" class="cta-button primary">
+                    <i class="fas fa-home"></i> Ir al inicio
+                </a>
+                <a href="https://wa.me/+573015382699" target="_blank" class="cta-button">
+                    <i class="fab fa-whatsapp"></i> Escríbenos por WhatsApp
+                </a>
+            </div>
+        </div>
+
+        <div class="lang-block">
+            <p><strong>Page not found.</strong> The link you followed may be broken, or the page has moved.</p>
+            <div class="cta-row">
+                <a href="en/index.html" class="cta-button primary">
+                    <i class="fas fa-home"></i> Go home
+                </a>
+                <a href="https://wa.me/+573015382699" target="_blank" class="cta-button">
+                    <i class="fab fa-whatsapp"></i> Message us on WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

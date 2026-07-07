@@ -17,6 +17,6 @@ jobs:
       - name: Site invariants (scripts/verify.mjs)
         run: node scripts/verify.mjs
       - name: HTML validation
-        run: npx --yes html-validate@8 index.html en/index.html
+        run: npx --yes html-validate@8 index.html en/index.html 404.html
       - name: CSS lint
         run: npm run lint:css
