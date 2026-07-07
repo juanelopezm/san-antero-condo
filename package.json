@@ -7,7 +7,7 @@
     "serve": "bash scripts/serve.sh",
     "verify": "node scripts/verify.mjs",
     "lint:html": "npx --yes html-validate@8 index.html en/index.html",
-    "lint:css": "npx --yes stylelint@16 --config .stylelintrc.json \"assets/css/*.css\"",
+    "lint:css": "npm install --no-save --silent stylelint@16 stylelint-config-standard@36 && npx stylelint --config .stylelintrc.json \"assets/css/*.css\"",
     "check": "npm run verify && npm run lint:html"
   }
 }

@@ -9,7 +9,7 @@ priority band unless dependencies force otherwise.
 | [PRD-001](prds/PRD-001-bilingual-unification.md) | Bilingual architecture unification | P0 | — | Done | d1b5891 |
 | [PRD-004](prds/PRD-004-booking-funnel.md) | Booking funnel hardening | P0 | PRD-001 | In progress (phone/validation/how-to-book done; pricing blocked on owner data) | |
 | [PRD-002](prds/PRD-002-media-performance.md) | Media and performance optimization | P0 | PRD-001 | Done (Lighthouse score unmeasurable in this sandbox — see PRD notes) | |
-| [PRD-005](prds/PRD-005-quality-ci.md) | Quality tooling and CI | P0 | — | In progress | |
+| [PRD-005](prds/PRD-005-quality-ci.md) | Quality tooling and CI | P0 | — | Done | |
 | [PRD-003](prds/PRD-003-seo-discoverability.md) | SEO and discoverability | P1 | — | Not started | |
 | [PRD-006](prds/PRD-006-accessibility.md) | Accessibility (WCAG 2.1 AA) | P1 | PRD-001 | Not started | |
 | [PRD-007](prds/PRD-007-analytics.md) | Analytics and conversion measurement | P2 | PRD-004 | Not started | |

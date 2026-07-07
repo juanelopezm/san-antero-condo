@@ -24,7 +24,10 @@ scripts/serve.sh    Local preview matching the Pages layout
 2. Preview: `bash scripts/serve.sh` → check `/` and `/en/` (also at 360px width).
 3. Edit. **Any content/structure change to one language must land on the other in
    the same commit.**
-4. Gate: `node scripts/verify.mjs` must exit 0. `npm run check` adds HTML validation.
+4. Gate: `node scripts/verify.mjs` must exit 0. `npm run check` adds HTML validation;
+   `npm run lint:css` lints the shared stylesheet (installs `stylelint` locally,
+   not saved to `package.json` — same pattern CI uses). CI runs all three on every
+   push.
 5. When a PRD's acceptance criteria are all met: flip that PRD's flag in the
    `ENFORCE` block of `scripts/verify.mjs` (turns its warnings into errors),
    set the PRD file's Status to Done, and update its `docs/BACKLOG.md` row with
@@ -56,7 +59,8 @@ summary, and move on — never invent prices, phone numbers, or reviews.
 
 - Safari has repeatedly broken on background-image paths and `backdrop-filter` —
   after CSS changes, sanity-check WebKit (`-webkit-backdrop-filter`, path
-  resolution).
+  resolution). This is also why `.stylelintrc.json` disables
+  `property-no-vendor-prefix` — don't let a linter or `--fix` strip that prefix.
 - The hero jacuzzi image's focal point is sensitive: `background-position` is
   deliberately `55%/60%` (commit `fce7d99`). Don't "fix" it without looking at it.
 - `styles.css?v=N` cache-busting: bump the version on both pages together when

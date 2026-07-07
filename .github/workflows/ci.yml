@@ -18,6 +18,5 @@ jobs:
         run: node scripts/verify.mjs
       - name: HTML validation
         run: npx --yes html-validate@8 index.html en/index.html
-        # PRD-005: pre-existing markup issues may fail here at first.
-        # Fix them (don't silence the step) as part of PRD-005.
-        continue-on-error: true
+      - name: CSS lint
+        run: npm run lint:css
