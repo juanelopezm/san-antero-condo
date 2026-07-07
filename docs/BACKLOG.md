@@ -6,7 +6,7 @@ priority band unless dependencies force otherwise.
 
 | PRD | Title | Priority | Depends on | Status | Completed in |
 |---|---|---|---|---|---|
-| [PRD-001](prds/PRD-001-bilingual-unification.md) | Bilingual architecture unification | P0 | — | Done | pending push |
+| [PRD-001](prds/PRD-001-bilingual-unification.md) | Bilingual architecture unification | P0 | — | Done | d1b5891 |
 | [PRD-004](prds/PRD-004-booking-funnel.md) | Booking funnel hardening | P0 | PRD-001 | Not started | |
 | [PRD-002](prds/PRD-002-media-performance.md) | Media and performance optimization | P0 | PRD-001 | Not started | |
 | [PRD-005](prds/PRD-005-quality-ci.md) | Quality tooling and CI | P0 | — | In progress | |
