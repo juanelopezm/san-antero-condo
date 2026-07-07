@@ -7,7 +7,7 @@ priority band unless dependencies force otherwise.
 | PRD | Title | Priority | Depends on | Status | Completed in |
 |---|---|---|---|---|---|
 | [PRD-001](prds/PRD-001-bilingual-unification.md) | Bilingual architecture unification | P0 | — | Done | d1b5891 |
-| [PRD-004](prds/PRD-004-booking-funnel.md) | Booking funnel hardening | P0 | PRD-001 | Not started | |
+| [PRD-004](prds/PRD-004-booking-funnel.md) | Booking funnel hardening | P0 | PRD-001 | In progress (phone/validation/how-to-book done; pricing blocked on owner data) | |
 | [PRD-002](prds/PRD-002-media-performance.md) | Media and performance optimization | P0 | PRD-001 | Not started | |
 | [PRD-005](prds/PRD-005-quality-ci.md) | Quality tooling and CI | P0 | — | In progress | |
 | [PRD-003](prds/PRD-003-seo-discoverability.md) | SEO and discoverability | P1 | — | Not started | |
@@ -28,8 +28,11 @@ priority band unless dependencies force otherwise.
 Agents: when you hit one of these, don't guess — leave the item flagged and note it
 in your completion summary.
 
-- [ ] Canonical WhatsApp number: is `+573014109986` (hero "Reserva Ahora") a second
-      manager, or a typo for `+573015382699`? (PRD-004)
+- [ ] Canonical WhatsApp number: **applied default** — the hero "Reserva Ahora"/
+      "Book Now" button now points to `+573015382699` (matching the other 18 of 20
+      links) and `+573014109986` was removed from the funnel entirely. If
+      `+573014109986` was actually a second manager's line rather than a typo,
+      tell us and we'll revert + route it deliberately. (PRD-004)
 - [ ] Real pricing per unit/season for `pricing.json` (PRD-004)
 - [ ] Analytics choice: GA4 (recommended) vs GoatCounter, and who owns the account (PRD-007)
 - [ ] 2–3 recent attributable guest reviews (PRD-008)

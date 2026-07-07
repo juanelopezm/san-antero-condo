@@ -1,6 +1,19 @@
 // Shared site enhancements: hero carousel, availability form handler, WhatsApp deep links, JSON-LD injection
 
 (function() {
+    // Captured synchronously so it's still valid inside async callbacks below (PRD-004).
+    var THIS_SCRIPT_URL = document.currentScript && document.currentScript.src;
+
+    // Canonical booking number (PRD-004): the site previously split traffic across
+    // two numbers; +573015382699 was already used by 18 of 20 wa.me links.
+    var BOOKING_PHONE = '+573015382699';
+
+    // Studios (101-104) sleep up to 5; apartments (201-202) sleep up to 10 (matches hero copy).
+    var UNIT_CAPACITY = { '101': 5, '102': 5, '103': 5, '104': 5, '201': 10, '202': 10 };
+    var MAX_GUESTS_ANY_UNIT = 10;
+
+    var pricingByUnit = null; // populated by loadPricing() if assets/data/pricing.json has usable numbers
+
     function initHeroCarousel() {
         if (typeof Swiper === 'undefined' || !document.querySelector('.swiper-container')) return;
         // eslint-disable-next-line no-new
@@ -18,12 +31,19 @@
         try { return new Date(dateStr).toISOString().slice(0,10); } catch(e) { return ''; }
     }
 
+    function todayISO() {
+        return new Date().toISOString().slice(0, 10);
+    }
+
     function buildWhatsAppText(locale, data) {
-        const { apartmentId, checkin, checkout, guests } = data;
+        const { apartmentId, checkin, checkout, guests, price } = data;
+        const priceLine = price
+            ? (locale === 'en' ? ` (rate shown: ${price})` : ` (tarifa mostrada: ${price})`)
+            : '';
         if (locale === 'en') {
-            return `Hello! I'm interested in booking Apartment ${apartmentId || ''} from ${checkin || 'N/A'} to ${checkout || 'N/A'} for ${guests || 'N/A'} guests.`.trim();
+            return `Hello! I'm interested in booking Apartment ${apartmentId || ''} from ${checkin || 'N/A'} to ${checkout || 'N/A'} for ${guests || 'N/A'} guests.${priceLine}`.trim();
         }
-        return `¡Hola! Estoy interesado en reservar el Apartamento ${apartmentId || ''} del ${checkin || 'N/A'} al ${checkout || 'N/A'} para ${guests || 'N/A'} personas.`.trim();
+        return `¡Hola! Estoy interesado en reservar el Apartamento ${apartmentId || ''} del ${checkin || 'N/A'} al ${checkout || 'N/A'} para ${guests || 'N/A'} personas.${priceLine}`.trim();
     }
 
     function getLocale() {
@@ -32,8 +52,54 @@
     }
 
     function getPhoneForLocale() {
-        // Site uses two numbers in hero buttons; default to +573015382699 for booking
-        return '+573015382699';
+        return BOOKING_PHONE;
+    }
+
+    // PRD-004: reject impossible dates/guest counts before a WhatsApp message is ever built.
+    function validateAvailability(locale, { checkin, checkout, guests, apartmentId }) {
+        const errors = [];
+        const t = locale === 'en'
+            ? {
+                pastCheckin: 'Check-in date must be today or later.',
+                order: 'Check-out date must be after check-in date.',
+                guestsRange: 'Number of guests must be between 1 and 10.',
+                capacity: (id, max) => `Apartment ${id} holds up to ${max} guests. Choose a smaller party or a different unit.`,
+              }
+            : {
+                pastCheckin: 'La fecha de llegada debe ser hoy o una fecha futura.',
+                order: 'La fecha de salida debe ser posterior a la fecha de llegada.',
+                guestsRange: 'El número de huéspedes debe estar entre 1 y 10.',
+                capacity: (id, max) => `El Apartamento ${id} admite hasta ${max} personas. Elige un grupo más pequeño u otra unidad.`,
+              };
+
+        if (checkin && checkin < todayISO()) errors.push(t.pastCheckin);
+        if (checkin && checkout && checkout <= checkin) errors.push(t.order);
+
+        const guestsNum = parseInt(guests, 10);
+        if (!guestsNum || guestsNum < 1 || guestsNum > MAX_GUESTS_ANY_UNIT) {
+            errors.push(t.guestsRange);
+        } else if (apartmentId && UNIT_CAPACITY[apartmentId] && guestsNum > UNIT_CAPACITY[apartmentId]) {
+            errors.push(t.capacity(apartmentId, UNIT_CAPACITY[apartmentId]));
+        }
+        return errors;
+    }
+
+    function ensureFormErrorBox(form) {
+        let box = form.querySelector('.form-error');
+        if (!box) {
+            box = document.createElement('div');
+            box.className = 'form-error';
+            box.setAttribute('role', 'alert');
+            box.setAttribute('aria-live', 'polite');
+            form.appendChild(box);
+        }
+        return box;
+    }
+
+    function showFormErrors(form, errors) {
+        const box = ensureFormErrorBox(form);
+        box.innerHTML = errors.map((e) => `<p>${e}</p>`).join('');
+        box.hidden = errors.length === 0;
     }
 
     function attachAvailabilityHandler() {
@@ -46,7 +112,16 @@
             const guests = form.querySelector('[name="guests"]').value || '';
             const apartmentId = form.querySelector('[name="apartment"]').value || '';
             const locale = getLocale();
-            const text = encodeURIComponent(buildWhatsAppText(locale, { apartmentId, checkin, checkout, guests }));
+
+            const errors = validateAvailability(locale, { checkin, checkout, guests, apartmentId });
+            if (errors.length) {
+                showFormErrors(form, errors);
+                return;
+            }
+            showFormErrors(form, []);
+
+            const price = apartmentId && pricingByUnit ? pricingByUnit[apartmentId] : null;
+            const text = encodeURIComponent(buildWhatsAppText(locale, { apartmentId, checkin, checkout, guests, price }));
             const phone = getPhoneForLocale();
             window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
         });
@@ -61,6 +136,49 @@
         a.setAttribute('aria-label', 'WhatsApp');
         a.innerHTML = '<i class="fab fa-whatsapp"></i>';
         document.body.appendChild(a);
+    }
+
+    // PRD-004: assets/data/pricing.json carries owner-supplied nightly rates. Until the
+    // owner fills them in every price is null, so we deliberately render nothing rather
+    // than ship a visible table full of "TBD" to guests — see docs/prds/PRD-004.
+    function loadPricing() {
+        if (!THIS_SCRIPT_URL) return;
+        let dataUrl;
+        try {
+            dataUrl = new URL('../data/pricing.json', THIS_SCRIPT_URL).href;
+        } catch (e) {
+            return;
+        }
+        fetch(dataUrl).then((r) => (r.ok ? r.json() : null)).then((data) => {
+            if (!data || !Array.isArray(data.units) || !Array.isArray(data.seasons)) return;
+            const hasRealPrice = data.seasons.some((s) => s.studioPricePerNight != null || s.apartmentPricePerNight != null);
+            if (!hasRealPrice) return; // nothing to show yet
+
+            const byId = {};
+            data.units.forEach((u) => {
+                const season = data.seasons[0];
+                const nightly = u.type === 'studio' ? season.studioPricePerNight : season.apartmentPricePerNight;
+                if (nightly != null) byId[u.id] = `${nightly} ${data.currency || 'COP'}/${getLocale() === 'en' ? 'night' : 'noche'}`;
+            });
+            pricingByUnit = byId;
+            renderPricingTable(data);
+        }).catch(() => { /* offline or file:// — keep the existing static CTA */ });
+    }
+
+    function renderPricingTable(data) {
+        const mount = document.querySelector('#pricing-table');
+        if (!mount) return;
+        const locale = getLocale();
+        const rows = data.seasons.map((season) => {
+            const label = (season.label && season.label[locale]) || season.id;
+            const studio = season.studioPricePerNight != null ? `${season.studioPricePerNight} ${data.currency}` : '—';
+            const apt = season.apartmentPricePerNight != null ? `${season.apartmentPricePerNight} ${data.currency}` : '—';
+            return `<tr><th scope="row">${label}</th><td>${studio}</td><td>${apt}</td></tr>`;
+        }).join('');
+        const studioHead = locale === 'en' ? 'Studio (101–104)' : 'Apartaestudio (101–104)';
+        const aptHead = locale === 'en' ? 'Apartment (201–202)' : 'Apartamento (201–202)';
+        mount.innerHTML = `<table class="pricing-grid"><thead><tr><th scope="col"></th><th scope="col">${studioHead}</th><th scope="col">${aptHead}</th></tr></thead><tbody>${rows}</tbody></table>`;
+        mount.hidden = false;
     }
 
     function injectStructuredData() {
@@ -134,6 +252,7 @@
         attachAvailabilityHandler();
         ensureFloatingWhatsApp();
         injectStructuredData();
+        loadPricing();
 
         // Lightweight event tracking hooks (works with GTM/GA4 if dataLayer exists)
         const floatBtn = document.querySelector('.whatsapp-float');

@@ -18,11 +18,12 @@ const ENFORCE = {
   sharedAssetsOnly: true,  // PRD-001: en/ must use shared assets/css + assets/js (Done)
   mediaBudget: false,      // PRD-002: referenced media within size budget
   seoFiles: false,         // PRD-003: sitemap/robots/404/favicon/manifest exist
-  singlePhone: false,      // PRD-004: one canonical WhatsApp number
+  singlePhone: true,       // PRD-004: one canonical WhatsApp number (Done)
 };
 
-// PRD-004: numbers currently in use. Once canonicalized, reduce to one entry.
-const ALLOWED_PHONES = new Set(['573015382699', '573014109986']);
+// PRD-004: +573014109986 was a duplicate hero-button number; consolidated onto
+// the canonical +573015382699 (18 of 20 links already used it).
+const ALLOWED_PHONES = new Set(['573015382699']);
 
 const PAGES = ['index.html', 'en/index.html'];
 const errors = [];
@@ -160,8 +161,8 @@ for (const page of PAGES) {
 // --- 6. PRD-004: WhatsApp funnel ----------------------------------------------
 const phones = new Set();
 const sources = PAGES.filter((p) => pageHtml[p]).map((p) => [p, pageHtml[p]]);
-for (const js of ['assets/js/scripts.js', 'en/js/main.js']) {
-  if (existsSync(join(ROOT, js))) sources.push([js, read(js)]);
+if (existsSync(join(ROOT, 'assets/js/scripts.js'))) {
+  sources.push(['assets/js/scripts.js', read('assets/js/scripts.js')]);
 }
 for (const [file, text] of sources) {
   for (const m of text.matchAll(/wa\.me\/\+?(\d+)/g)) {
@@ -175,6 +176,21 @@ if (phones.size > 1) {
   flag(ENFORCE.singlePhone, `[PRD-004] ${phones.size} different WhatsApp numbers in the funnel: ${[...phones].map((p) => '+' + p).join(', ')}`);
 }
 if (phones.size === 0) errors.push('No WhatsApp links found — the booking funnel is gone');
+
+// --- 7. PRD-004: pricing data shape ------------------------------------------
+const pricingPath = 'assets/data/pricing.json';
+if (!existsSync(join(ROOT, pricingPath))) {
+  errors.push(`missing ${pricingPath}`);
+} else {
+  try {
+    const pricing = JSON.parse(read(pricingPath));
+    if (!Array.isArray(pricing.units) || !Array.isArray(pricing.seasons)) {
+      errors.push(`${pricingPath}: expected "units" and "seasons" arrays`);
+    }
+  } catch {
+    errors.push(`${pricingPath}: invalid JSON`);
+  }
+}
 
 // --- Report -------------------------------------------------------------------
 for (const w of warnings) console.log(`WARN  ${w}`);

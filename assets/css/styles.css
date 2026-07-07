@@ -207,6 +207,29 @@ header {
     padding: 0.9rem 1.4rem;
 }
 
+.form-error {
+    margin-top: 0.75rem;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    background: rgba(17, 5, 5, 0.85);
+    border: 1px solid #dc2626;
+    color: #fecaca;
+    text-align: left;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-error p {
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+}
+
+.form-error:empty,
+.form-error[hidden] {
+    display: none;
+}
+
 /* Swiper Navigation */
 .swiper-button-next,
 .swiper-button-prev {
@@ -1035,6 +1058,62 @@ footer p {
 .pricing-section .cta-button {
     display: inline-block;
     margin-top: 1rem;
+}
+
+.pricing-table {
+    margin: 2rem auto 0;
+    max-width: 560px;
+    overflow-x: auto;
+}
+
+.pricing-grid {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.pricing-grid th,
+.pricing-grid td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: center;
+}
+
+.pricing-grid thead th {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.pricing-grid th[scope="row"] {
+    text-align: left;
+    font-weight: 600;
+}
+
+.how-to-book {
+    max-width: 640px;
+    margin: 2.5rem auto 0;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.how-to-book h3 {
+    margin-bottom: 0.75rem;
+    color: var(--primary-color);
+}
+
+.how-to-book ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.how-to-book li {
+    margin-bottom: 0.5rem;
 }
 
 .pricing-grid {

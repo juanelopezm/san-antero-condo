@@ -1,0 +1,35 @@
+{
+  "currency": "COP",
+  "note": "Structure only — nightly prices are pending owner confirmation (see docs/BACKLOG.md 'Decisions needed from the owner'). scripts.js deliberately does not render a pricing table while every *PricePerNight value is null.",
+  "units": [
+    { "id": "101", "type": "studio", "capacityGuests": 5 },
+    { "id": "102", "type": "studio", "capacityGuests": 5 },
+    { "id": "103", "type": "studio", "capacityGuests": 5 },
+    { "id": "104", "type": "studio", "capacityGuests": 5 },
+    { "id": "201", "type": "apartment", "capacityGuests": 10 },
+    { "id": "202", "type": "apartment", "capacityGuests": 10 }
+  ],
+  "seasons": [
+    {
+      "id": "low",
+      "label": { "es": "Temporada baja", "en": "Low season" },
+      "studioPricePerNight": null,
+      "apartmentPricePerNight": null,
+      "minStayNights": null
+    },
+    {
+      "id": "high",
+      "label": { "es": "Temporada alta", "en": "High season" },
+      "studioPricePerNight": null,
+      "apartmentPricePerNight": null,
+      "minStayNights": null
+    },
+    {
+      "id": "holiday",
+      "label": { "es": "Fin de semana festivo", "en": "Holiday weekend" },
+      "studioPricePerNight": null,
+      "apartmentPricePerNight": null,
+      "minStayNights": null
+    }
+  ]
+}

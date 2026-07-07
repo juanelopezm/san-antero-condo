@@ -1,6 +1,6 @@
 # PRD-004: Booking funnel hardening
 
-- **Status:** Not started
+- **Status:** In progress — items 1, 2, 5 done; items 3–4 blocked on real pricing/policy data from the owner (see Resolution notes)
 - **Priority:** P0
 - **Depends on:** PRD-001 (single shared scripts.js)
 - **Goal traceability:** "Generate booking inquiries"
@@ -52,12 +52,58 @@ editable JSON file rendered onto both pages.
 - Real-time availability calendar or double-booking prevention (owner-managed).
 - Payment links.
 
+## Resolution notes
+
+**Done, unblocked (no invented data required):**
+
+- **Requirement 1 (single number):** used the documented default —
+  `+573015382699` — since it already covered 18 of 20 `wa.me` links; the outlier
+  was only the hero "Reserva Ahora"/"Book Now" button on both pages. Fixed both,
+  removed the second number from `scripts.js`'s `BOOKING_PHONE`, and shrank
+  `verify.mjs`'s `ALLOWED_PHONES` to the single canonical number with
+  `singlePhone` now enforced. **Flagging per CLAUDE.md:** if `+573014109986` was
+  actually a second manager's line rather than a typo, this needs to be reverted
+  and the second number routed deliberately — owner confirmation still open in
+  `docs/BACKLOG.md`.
+- **Requirement 2 (form validation):** implemented in `scripts.js`
+  (`validateAvailability`): rejects checkin before today, checkout ≤ checkin, and
+  guests outside 1–10; also validates guests against the selected unit's real
+  capacity (studios 101–104 max 5, apartments 201–202 max 10 — both facts already
+  stated in the hero copy). Errors render inline in a bilingual `.form-error` box
+  (`role="alert"`) instead of ever building a malformed WhatsApp message.
+  Verified end-to-end with a headless-browser script driving all four cases
+  (past date, inverted dates, over-capacity, valid submission) — see commit.
+- **Requirement 5 ("how to book" block):** added to both pages using only facts
+  already verified elsewhere on the site (check-in/check-out times, accepted
+  payment methods from the existing FAQ) plus a direct instruction to ask about
+  deposit/cancellation via WhatsApp — deliberately **not** inventing a deposit
+  percentage, a cancellation deadline, or a response-time SLA, since none of
+  those are documented anywhere in the repo and CLAUDE.md prohibits guessing
+  this kind of business fact.
+
+**Blocked on the owner (`docs/BACKLOG.md` → "Decisions needed from the owner"):**
+
+- **Requirement 3 (pricing data):** `assets/data/pricing.json` exists with the
+  full unit/season/min-stay structure the PRD asked for, but every price field
+  is `null` — there is no real pricing anywhere in the repo's history to draw
+  from, and CLAUDE.md is explicit: never invent prices. `scripts.js`
+  (`loadPricing`/`renderPricingTable`) fetches and parses the file on both pages
+  (confirmed via headless browser: no JS errors, `#pricing-table` correctly stays
+  `hidden` with empty markup while all prices are null) but **deliberately does
+  not render a table of placeholder values to real guests**. The moment the
+  owner fills in real numbers, the table renders with zero further code changes.
+- **Requirement 4 (price in the WhatsApp message):** the message builder
+  (`buildWhatsAppText`) already includes language, unit, dates, and guest count;
+  it has a `price` parameter wired to `pricingByUnit` and will append the rate
+  the visitor saw the moment requirement 3's data exists — untestable with real
+  values until then.
+
 ## Acceptance criteria
 
-- [ ] `grep -roE 'wa.me/[+0-9]+' index.html en/index.html assets/js | sort -u` returns exactly one number (or two, each documented in CLAUDE.md with its purpose)
-- [ ] Form rejects: past checkin, checkout ≤ checkin, guests out of range — with visible bilingual messages
-- [ ] `assets/data/pricing.json` exists, is valid JSON, and both pages render it
-- [ ] Submitting the form opens a WhatsApp URL whose decoded text contains dates, guests, unit, and price
-- [ ] `node scripts/verify.mjs` passes including the single-number check
-- [ ] ES and EN pages remain in parity
-- [ ] `docs/BACKLOG.md` row updated to Done with the completing commit hash
+- [x] `grep -roE 'wa.me/[+0-9]+' index.html en/index.html assets/js | sort -u` returns exactly one number
+- [x] Form rejects: past checkin, checkout ≤ checkin, guests out of range — with visible bilingual messages (headless-browser verified)
+- [x] `assets/data/pricing.json` exists, is valid JSON, and both pages fetch/parse it — rendering is intentionally withheld until prices are non-null (see notes)
+- [ ] Submitting the form opens a WhatsApp URL whose decoded text contains dates, guests, unit, and price — price omitted pending owner data; dates/guests/unit confirmed present
+- [x] `node scripts/verify.mjs` passes including the single-number check
+- [x] ES and EN pages remain in parity
+- [ ] `docs/BACKLOG.md` row updated to Done with the completing commit hash — kept at "In progress" until requirements 3–4 have real data
