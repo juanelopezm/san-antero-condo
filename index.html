@@ -25,39 +25,17 @@
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://unpkg.com">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style">
-    <link rel="preload" href="assets/css/styles.css?v=2" as="style">
+    <link rel="preload" href="assets/css/styles.css?v=5" as="style">
     <link rel="preload" href="assets/images/atardecer.jpg" as="image">
     <link rel="preload" href="assets/images/casa2.jpeg" as="image">
     <link rel="preload" href="https://unpkg.com/swiper/swiper-bundle.min.css" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="preload" href="https://unpkg.com/swiper/swiper-bundle.min.js" as="script">
     <title>Cabañas Mi Pequeño Paraíso - Tu Paraíso en Playa Blanca, San Antero</title>
-    <link rel="stylesheet" href="assets/css/styles.css?v=4">
+    <link rel="stylesheet" href="assets/css/styles.css?v=5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Add Swiper's CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    <style>
-        /* Ensure consistent size for images and videos in the gallery */
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            max-height: 40vh;
-            object-fit: cover;
-        }
-
-        .gallery-item video {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-        }
-
-        @media (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-        }
-    </style>
 </head>
 <body>
     <header role="banner">
@@ -576,53 +554,9 @@
 
     <!-- Add scripts before closing body tag -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
     <script src="assets/js/scripts.js"></script>
     <div class="sticky-cta-mobile">
         <a href="https://wa.me/+573015382699" target="_blank" class="cta-button primary"><i class="fab fa-whatsapp"></i> Reserva Ahora</a>
     </div>
-    <script>
-        // Popup Gallery Functions
-        function openGallery(galleryId) {
-            const gallery = document.getElementById(galleryId);
-            if (gallery) {
-                gallery.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-                // Add event listeners for closing
-                gallery.addEventListener('click', function(e) {
-                    if (e.target === gallery) {
-                        closeGallery(galleryId);
-                    }
-                });
-            }
-        }
-
-        function closeGallery(galleryId) {
-            const gallery = document.getElementById(galleryId);
-            if (gallery) {
-                gallery.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-        }
-
-        // Close gallery when clicking outside
-        document.addEventListener('click', function(event) {
-            if (event.target.classList.contains('popup-gallery')) {
-                event.target.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Close gallery with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const galleries = document.querySelectorAll('.popup-gallery');
-                galleries.forEach(gallery => {
-                    gallery.style.display = 'none';
-                });
-                document.body.style.overflow = '';
-            }
-        });
-    </script>
 </body>
 </html> 

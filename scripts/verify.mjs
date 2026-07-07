@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 const ENFORCE = {
-  sharedAssetsOnly: false, // PRD-001: en/ must use shared assets/css + assets/js
+  sharedAssetsOnly: true,  // PRD-001: en/ must use shared assets/css + assets/js (Done)
   mediaBudget: false,      // PRD-002: referenced media within size budget
   seoFiles: false,         // PRD-003: sitemap/robots/404/favicon/manifest exist
   singlePhone: false,      // PRD-004: one canonical WhatsApp number

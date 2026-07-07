@@ -1,6 +1,18 @@
-// Shared site enhancements: availability form handler, WhatsApp deep links, JSON-LD injection
+// Shared site enhancements: hero carousel, availability form handler, WhatsApp deep links, JSON-LD injection
 
 (function() {
+    function initHeroCarousel() {
+        if (typeof Swiper === 'undefined' || !document.querySelector('.swiper-container')) return;
+        // eslint-disable-next-line no-new
+        new Swiper('.swiper-container', {
+            direction: 'horizontal',
+            loop: true,
+            autoplay: { delay: 5000, disableOnInteraction: false },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        });
+    }
+
     function formatDate(dateStr) {
         if (!dateStr) return '';
         try { return new Date(dateStr).toISOString().slice(0,10); } catch(e) { return ''; }
@@ -118,6 +130,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
+        initHeroCarousel();
         attachAvailabilityHandler();
         ensureFloatingWhatsApp();
         injectStructuredData();
