@@ -14,6 +14,21 @@
 
     var pricingByUnit = null; // populated by loadPricing() if assets/data/pricing.json has usable numbers
 
+    // PRD-002: hero slides 2+ carry their background image in data-bg instead of
+    // an inline style, so only the first (already-visible, preloaded) slide's
+    // image downloads on page load. This applies the real background just before
+    // a slide can be seen — on init (for the starting neighbors) and on every
+    // transition — instead of every slide's photo loading eagerly.
+    function applyLazyHeroBackgrounds(swiper) {
+        const indices = [swiper.activeIndex - 1, swiper.activeIndex, swiper.activeIndex + 1];
+        indices.forEach((i) => {
+            const el = swiper.slides[i];
+            if (el && el.dataset && el.dataset.bg && !el.style.backgroundImage) {
+                el.style.backgroundImage = `url('${el.dataset.bg}')`;
+            }
+        });
+    }
+
     function initHeroCarousel() {
         if (typeof Swiper === 'undefined' || !document.querySelector('.swiper-container')) return;
         // eslint-disable-next-line no-new
@@ -23,6 +38,10 @@
             autoplay: { delay: 5000, disableOnInteraction: false },
             pagination: { el: '.swiper-pagination', clickable: true },
             navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+            on: {
+                init: function() { applyLazyHeroBackgrounds(this); },
+                slideChangeTransitionStart: function() { applyLazyHeroBackgrounds(this); },
+            },
         });
     }
 

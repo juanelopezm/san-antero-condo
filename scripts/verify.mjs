@@ -53,7 +53,7 @@ const referenced = new Map(); // abs path -> first referencing file
 
 function collectRefs(rel, html) {
   const dir = dirname(join(ROOT, rel));
-  const attrRe = /(?:src|href|poster)\s*=\s*["']([^"']+)["']/g;
+  const attrRe = /(?:src|href|poster|data-bg)\s*=\s*["']([^"']+)["']/g;
   const urlRe = /url\(\s*['"]?([^'")]+)['"]?\s*\)/g;
   for (const re of [attrRe, urlRe]) {
     for (const m of html.matchAll(re)) {

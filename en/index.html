@@ -20,21 +20,22 @@
     <link rel="alternate" hreflang="x-default" href="https://juanelopezm.github.io/san-antero-condo/">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://unpkg.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://unpkg.com">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style">
     <link rel="preload" href="../assets/css/styles.css?v=5" as="style">
-    <link rel="preload" href="../assets/images/atardecer.jpg" as="image">
     <link rel="preload" href="../assets/images/casa2.jpeg" as="image">
-    <link rel="preload" href="https://unpkg.com/swiper/swiper-bundle.min.css" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="preload" href="https://unpkg.com/swiper/swiper-bundle.min.js" as="script">
+    <link rel="preload" href="../assets/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/playfair-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://unpkg.com/swiper@14.0.1/swiper-bundle.min.css" as="style">
+    <link rel="preload" href="https://unpkg.com/swiper@14.0.1/swiper-bundle.min.js" as="script">
     <title>Cabañas Mi Pequeño Paraíso Cottages - Your Paradise in Playa Blanca, San Antero</title>
     <link rel="stylesheet" href="../assets/css/styles.css?v=5">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <!-- Font Awesome loaded async (PRD-002): preload + onload swap so its CSS
+         doesn't block first render; icons pop in a beat later instead of
+         delaying the page. -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@14.0.1/swiper-bundle.min.css">
 </head>
 <body>
     <header role="banner">
@@ -80,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="swiper-slide hero-jacuzzi" style="background-image: url('../assets/images/jacuzzi.jpg')">
+                <div class="swiper-slide hero-jacuzzi" data-bg="../assets/images/jacuzzi.jpg">
                     <div class="hero-content">
                         <h1>Jacuzzi with Ocean View</h1>
                         <p class="tagline">Relax in our 10-person jacuzzi</p>
@@ -94,7 +95,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="swiper-slide" style="background-image: url('../assets/images/pool1.jpg')">
+                <div class="swiper-slide" data-bg="../assets/images/pool1.jpg">
                     <div class="hero-content">
                         <h1>Pool and Common Areas</h1>
                         <p class="tagline">Enjoy our first-class facilities</p>
@@ -124,7 +125,7 @@
                 <p class="apartment-description">Four cozy studio apartments, perfect for families or groups of friends.</p>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <video controls>
+                        <video controls preload="none" poster="../assets/images/101-poster.jpg" width="480" height="768">
                             <source src="../assets/images/101.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -141,7 +142,7 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <video controls>
+                        <video controls preload="none" poster="../assets/images/102-poster.jpg" width="480" height="848">
                             <source src="../assets/images/102.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -158,7 +159,7 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <video controls>
+                        <video controls preload="none" poster="../assets/images/103-poster.jpg" width="480" height="848">
                             <source src="../assets/images/103.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -175,7 +176,7 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <video controls>
+                        <video controls preload="none" poster="../assets/images/104-poster.jpg" width="480" height="848">
                             <source src="../assets/images/104.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -197,7 +198,7 @@
                 <p class="apartment-description">Two spacious studio apartments, ideal for large groups or family gatherings.</p>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <video controls>
+                        <video controls preload="none" poster="../assets/images/201-poster.jpg" width="480" height="848">
                             <source src="../assets/images/201.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -214,7 +215,7 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <video controls>
+                        <video controls preload="none" poster="../assets/images/202-poster.jpg" width="480" height="768">
                             <source src="../assets/images/202.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -292,7 +293,7 @@
         <section id="special-events" class="highlight-section">
             <h2>Special Events</h2>
             <div class="event-card">
-                <img src="../assets/images/festival-del-burro.jpg" alt="National Donkey Festival">
+                <img src="../assets/images/festival-del-burro.jpg" alt="National Donkey Festival" width="1100" height="1375" loading="lazy">
                 <h3><i class="fas fa-calendar-star"></i> National Donkey Festival 2025</h3>
                 <p>Don't miss it! Come and enjoy the national donkey festival. Book now!</p>
                 <a href="#contact" class="cta-button">Book for the Festival</a>
@@ -324,7 +325,7 @@
                             <i class="fas fa-directions"></i> View Route on Google Maps
                         </a>
                     </div>
-                    <img src="../assets/images/atardecer.jpg" alt="View of Cispatá Bay" class="location-image">
+                    <img src="../assets/images/atardecer.jpg" alt="View of Cispatá Bay" class="location-image" width="1024" height="768" loading="lazy">
                 </div>
             </div>
         </section>
@@ -416,25 +417,25 @@
             <h2 id="videos-heading">Videos</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <video controls>
+                    <video controls preload="none" poster="../assets/images/entrada-casa-poster.jpg" width="480" height="640">
                         <source src="../assets/images/entrada-casa.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="gallery-item">
-                    <video controls>
+                    <video controls preload="none" poster="../assets/images/terraza-2-poster.jpg" width="640" height="350">
                         <source src="../assets/images/terraza-2.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="gallery-item">
-                    <video controls>
+                    <video controls preload="none" poster="../assets/images/terraza-poster.jpg" width="480" height="768">
                         <source src="../assets/images/terraza.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="gallery-item">
-                    <video controls>
+                    <video controls preload="none" poster="../assets/images/tintinpan-poster.jpg" width="640" height="352">
                         <source src="../assets/images/tintinpan.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -446,55 +447,55 @@
             <h2 id="photos-heading">Photo Gallery</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="../assets/images/pool1.jpg" alt="Main Pool" loading="lazy">
+                    <img src="../assets/images/pool1.jpg" alt="Main Pool" width="768" height="576" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/pool2.jpg" alt="Pool Area" loading="lazy">
+                    <img src="../assets/images/pool2.jpg" alt="Pool Area" width="768" height="576" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/pool3.jpg" alt="Rest Area" loading="lazy">
+                    <img src="../assets/images/pool3.jpg" alt="Rest Area" width="768" height="576" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/pool4.jpg" alt="Pool View" loading="lazy">
+                    <img src="../assets/images/pool4.jpg" alt="Pool View" width="768" height="576" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/pool5.jpg" alt="Recreational Area" loading="lazy">
+                    <img src="../assets/images/pool5.jpg" alt="Recreational Area" width="768" height="576" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/atardecer2.jpg" alt="Sunset in San Antero" loading="lazy">
+                    <img src="../assets/images/atardecer2.jpg" alt="Sunset in San Antero" width="960" height="720" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/casa.jpeg" alt="House View 1" loading="lazy">
+                    <img src="../assets/images/casa.jpeg" alt="House View 1" width="1600" height="900" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/casa2.jpeg" alt="House View 2" loading="lazy">
+                    <img src="../assets/images/casa2.jpeg" alt="House View 2" width="1024" height="768" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/102-2.jpeg" alt="Apartment 102 View 2" loading="lazy">
+                    <img src="../assets/images/102-2.jpeg" alt="Apartment 102 View 2" width="768" height="1024" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/102-3.jpeg" alt="Apartment 102 View 3" loading="lazy">
+                    <img src="../assets/images/102-3.jpeg" alt="Apartment 102 View 3" width="768" height="1024" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/201-2.jpeg" alt="Apartment 201 View 2" loading="lazy">
+                    <img src="../assets/images/201-2.jpeg" alt="Apartment 201 View 2" width="1024" height="682" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/201-3.jpeg" alt="Apartment 201 View 3" loading="lazy">
+                    <img src="../assets/images/201-3.jpeg" alt="Apartment 201 View 3" width="576" height="1024" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/201-4.jpeg" alt="Apartment 201 View 4" loading="lazy">
+                    <img src="../assets/images/201-4.jpeg" alt="Apartment 201 View 4" width="1024" height="682" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/201-5.jpeg" alt="Apartment 201 View 5" loading="lazy">
+                    <img src="../assets/images/201-5.jpeg" alt="Apartment 201 View 5" width="1024" height="576" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/201-6.jpeg" alt="Apartment 201 View 6" loading="lazy">
+                    <img src="../assets/images/201-6.jpeg" alt="Apartment 201 View 6" width="576" height="1024" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/201-7.jpeg" alt="Apartment 201 View 7" loading="lazy">
+                    <img src="../assets/images/201-7.jpeg" alt="Apartment 201 View 7" width="768" height="1024" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="../assets/images/202.jpeg" alt="Apartment 202" loading="lazy">
+                    <img src="../assets/images/202.jpeg" alt="Apartment 202" width="1024" height="576" loading="lazy">
                 </div>
             </div>
         </section>
@@ -558,7 +559,7 @@
         </div>
     </footer>
 
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/swiper@14.0.1/swiper-bundle.min.js"></script>
     <script src="../assets/js/scripts.js"></script>
     <div class="sticky-cta-mobile">
         <a href="https://wa.me/+573015382699" target="_blank" class="cta-button primary"><i class="fab fa-whatsapp"></i> Book Now</a>

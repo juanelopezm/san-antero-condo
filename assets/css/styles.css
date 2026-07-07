@@ -1,3 +1,47 @@
+/* Self-hosted fonts (PRD-002): latin-subset woff2 pulled once from Google Fonts and
+   served same-origin, so the page no longer round-trips to fonts.googleapis.com
+   before it can even request the actual font files. Covers Spanish accents/ñ (all
+   within U+0000-00FF). */
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/poppins-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('../fonts/poppins-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/poppins-700.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('../fonts/playfair-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/playfair-700.woff2') format('woff2');
+}
+
 /* Reset and Base Styles */
 :root {
     --primary-color: #0ea5e9; /* Caribbean blue */
