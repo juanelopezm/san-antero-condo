@@ -13,7 +13,7 @@ priority band unless dependencies force otherwise.
 | [PRD-003](prds/PRD-003-seo-discoverability.md) | SEO and discoverability | P1 | — | Done | |
 | [PRD-006](prds/PRD-006-accessibility.md) | Accessibility (WCAG 2.1 AA) | P1 | PRD-001 | Done | |
 | [PRD-007](prds/PRD-007-analytics.md) | Analytics and conversion measurement | P2 | PRD-004 | Not started | |
-| [PRD-008](prds/PRD-008-content-trust.md) | Content accuracy and trust | P2 | — | Not started | |
+| [PRD-008](prds/PRD-008-content-trust.md) | Content accuracy and trust | P2 | — | In progress (README/attractions/security/footer done; reviews blocked on owner data) | |
 
 ## Recommended order
 
@@ -35,8 +35,9 @@ in your completion summary.
       tell us and we'll revert + route it deliberately. (PRD-004)
 - [ ] Real pricing per unit/season for `pricing.json` (PRD-004)
 - [ ] Analytics choice: GA4 (recommended) vs GoatCounter, and who owns the account (PRD-007)
-- [ ] 2–3 recent attributable guest reviews (PRD-008)
-- [ ] Confirm tour destinations: Islas de San Bernardo / Múcura / Tintipán naming (PRD-008)
+- [ ] 2–3 recent, real, dated, sourced guest reviews — the 2 existing reviews
+      have a name each but no date/platform, and were left as-is rather than
+      have a date/platform invented for them (PRD-008)
 - [ ] Register `sitemap.xml` with Google Search Console / Bing Webmaster Tools once PRD-003 is live — agents can't do this, needs the owner's Google/Microsoft account (PRD-003, done otherwise)
 - [ ] Confirm whether any gallery/apartment video has spoken narration — audio
       streams exist on a few clips but content wasn't exhaustively checked; if any

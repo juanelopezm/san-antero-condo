@@ -67,6 +67,8 @@ summary, and move on — never invent prices, phone numbers, or reviews.
   changing the stylesheet.
 - Some translations differ in nuance, not just language — read the EN text, don't
   machine-copy the Spanish.
+- Footer `&copy; YYYY` is a static year (no build step to auto-generate it) —
+  bump it on both pages together when you touch the footer, or at year-start.
 
 ## Commits
 
