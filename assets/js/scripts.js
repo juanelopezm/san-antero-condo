@@ -1,5 +1,6 @@
-// Shared site enhancements: hero carousel, availability form handler, WhatsApp deep links
-// (structured data / JSON-LD lives statically in each page's <head> — see PRD-003)
+// Shared site enhancements: hero carousel, availability form handler, WhatsApp deep links,
+// analytics event tracking (structured data / JSON-LD lives statically in each
+// page's <head> — see PRD-003)
 
 (function() {
     // Captured synchronously so it's still valid inside async callbacks below (PRD-004).
@@ -14,6 +15,34 @@
     var MAX_GUESTS_ANY_UNIT = 10;
 
     var pricingByUnit = null; // populated by loadPricing() if assets/data/pricing.json has usable numbers
+
+    // PRD-007: inert until the owner creates a GA4 property and this is filled in
+    // (format "G-XXXXXXXXXX") — with it empty, nothing loads and no events fire
+    // anywhere, so this is always safe to leave as-is. See docs/prds/PRD-007.
+    var GA_MEASUREMENT_ID = '';
+
+    function initAnalytics() {
+        if (!GA_MEASUREMENT_ID) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', GA_MEASUREMENT_ID);
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+        document.head.appendChild(s);
+    }
+
+    // Works whether or not GA4 is configured yet — pushes to dataLayer if gtag.js
+    // is loaded, otherwise just logs, so instrumentation can land now and start
+    // producing real data the moment GA_MEASUREMENT_ID is filled in.
+    function trackEvent(name, params) {
+        if (window.dataLayer) {
+            window.dataLayer.push(Object.assign({ event: name }, params || {}));
+        } else {
+            try { console.log('Event:', name, params || {}); } catch (e) { /* noop */ }
+        }
+    }
 
     // PRD-002: hero slides 2+ carry their background image in data-bg instead of
     // an inline style, so only the first (already-visible, preloaded) slide's
@@ -146,6 +175,9 @@
             const price = apartmentId && pricingByUnit ? pricingByUnit[apartmentId] : null;
             const text = encodeURIComponent(buildWhatsAppText(locale, { apartmentId, checkin, checkout, guests, price }));
             const phone = getPhoneForLocale();
+            // PRD-007: only counts genuinely valid submissions (past the errors.length
+            // check above) — a rejected submission isn't a real funnel event.
+            trackEvent('availability_submit', { apartment: apartmentId || 'any', guests });
             window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
         });
     }
@@ -157,6 +189,7 @@
         a.href = `https://wa.me/${getPhoneForLocale()}?text=${encodeURIComponent(buildWhatsAppText(getLocale(), {}))}`;
         a.target = '_blank';
         a.setAttribute('aria-label', 'WhatsApp');
+        a.dataset.ctaLocation = 'floating_button';
         a.innerHTML = '<i class="fab fa-whatsapp"></i>';
         document.body.appendChild(a);
     }
@@ -204,32 +237,36 @@
         mount.hidden = false;
     }
 
+    // PRD-007: every WhatsApp CTA on the page (hero, apartment cards, pricing,
+    // footer, sticky mobile bar, plus the floating button) fires the same event
+    // with a cta_location so conversions can be compared by placement. Uses
+    // data-cta-location where set on the markup, falls back to the element's
+    // visible text for the few links that don't carry it.
+    function attachCtaTracking() {
+        document.querySelectorAll('a[href*="wa.me"]').forEach((el) => {
+            el.addEventListener('click', () => {
+                trackEvent('whatsapp_click', {
+                    cta_location: el.dataset.ctaLocation || el.textContent.trim().slice(0, 40) || 'unknown',
+                });
+            });
+        });
+    }
+
+    function attachLanguageSwitchTracking() {
+        document.querySelectorAll('.language-selector a:not(.active)').forEach((el) => {
+            el.addEventListener('click', () => {
+                trackEvent('language_switch', { to: getLocale() === 'es' ? 'en' : 'es' });
+            });
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
+        initAnalytics();
         initHeroCarousel();
         attachAvailabilityHandler();
         ensureFloatingWhatsApp();
         loadPricing();
-
-        // Lightweight event tracking hooks (works with GTM/GA4 if dataLayer exists)
-        const floatBtn = document.querySelector('.whatsapp-float');
-        if (floatBtn) {
-            floatBtn.addEventListener('click', function() {
-                if (window.dataLayer) {
-                    window.dataLayer.push({ event: 'whatsapp_floating_click' });
-                } else {
-                    try { console.log('Event: whatsapp_floating_click'); } catch(e) {}
-                }
-            });
-        }
-        const form = document.querySelector('#availability-form');
-        if (form) {
-            form.addEventListener('submit', function() {
-                if (window.dataLayer) {
-                    window.dataLayer.push({ event: 'availability_submit' });
-                } else {
-                    try { console.log('Event: availability_submit'); } catch(e) {}
-                }
-            });
-        }
+        attachCtaTracking();
+        attachLanguageSwitchTracking();
     });
 })();

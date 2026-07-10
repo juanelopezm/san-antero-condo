@@ -12,7 +12,7 @@ priority band unless dependencies force otherwise.
 | [PRD-005](prds/PRD-005-quality-ci.md) | Quality tooling and CI | P0 | — | Done | |
 | [PRD-003](prds/PRD-003-seo-discoverability.md) | SEO and discoverability | P1 | — | Done | |
 | [PRD-006](prds/PRD-006-accessibility.md) | Accessibility (WCAG 2.1 AA) | P1 | PRD-001 | Done | |
-| [PRD-007](prds/PRD-007-analytics.md) | Analytics and conversion measurement | P2 | PRD-004 | Not started | |
+| [PRD-007](prds/PRD-007-analytics.md) | Analytics and conversion measurement | P2 | PRD-004 | In progress (instrumentation done, inert until a real GA4 ID exists) | |
 | [PRD-008](prds/PRD-008-content-trust.md) | Content accuracy and trust | P2 | — | In progress (README/attractions/security/footer done; reviews blocked on owner data) | |
 
 ## Recommended order
@@ -34,7 +34,12 @@ in your completion summary.
       `+573014109986` was actually a second manager's line rather than a typo,
       tell us and we'll revert + route it deliberately. (PRD-004)
 - [ ] Real pricing per unit/season for `pricing.json` (PRD-004)
-- [ ] Analytics choice: GA4 (recommended) vs GoatCounter, and who owns the account (PRD-007)
+- [ ] Analytics: **applied default** — instrumentation built for GA4 (per this
+      PRD's own recommendation), fully inert until a real Measurement ID
+      exists. Need: (1) confirm GA4 vs GoatCounter, (2) if GA4, create the
+      property and give us the `G-XXXXXXXXXX` ID to drop into
+      `GA_MEASUREMENT_ID` in `assets/js/scripts.js`, (3) once live, mark
+      `whatsapp_click` as a key event in GA4 Admin → Events (PRD-007)
 - [ ] 2–3 recent, real, dated, sourced guest reviews — the 2 existing reviews
       have a name each but no date/platform, and were left as-is rather than
       have a date/platform invented for them (PRD-008)
