@@ -132,18 +132,30 @@
                         </a>
                         <div class="availability-form">
                             <form id="availability-form">
-                                <input type="date" name="checkin" aria-label="Fecha de llegada" required>
-                                <input type="date" name="checkout" aria-label="Fecha de salida" required>
-                                <input type="number" name="guests" min="1" max="20" placeholder="Huéspedes" aria-label="Número de huéspedes" required>
-                                <select name="apartment" aria-label="Apartamento">
-                                    <option value="">Cualquiera</option>
-                                    <option value="101">101</option>
-                                    <option value="102">102</option>
-                                    <option value="103">103</option>
-                                    <option value="104">104</option>
-                                    <option value="201">201</option>
-                                    <option value="202">202</option>
-                                </select>
+                                <div class="form-field">
+                                    <label for="checkin">Llegada</label>
+                                    <input type="date" id="checkin" name="checkin" required>
+                                </div>
+                                <div class="form-field">
+                                    <label for="checkout">Salida</label>
+                                    <input type="date" id="checkout" name="checkout" required>
+                                </div>
+                                <div class="form-field">
+                                    <label for="guests">Huéspedes</label>
+                                    <input type="number" id="guests" name="guests" min="1" max="20" required>
+                                </div>
+                                <div class="form-field">
+                                    <label for="apartment">Apartamento</label>
+                                    <select id="apartment" name="apartment">
+                                        <option value="">Cualquiera</option>
+                                        <option value="101">101</option>
+                                        <option value="102">102</option>
+                                        <option value="103">103</option>
+                                        <option value="104">104</option>
+                                        <option value="201">201</option>
+                                        <option value="202">202</option>
+                                    </select>
+                                </div>
                                 <button type="submit" class="cta-button primary"><i class="fab fa-whatsapp"></i> Consultar por WhatsApp</button>
                             </form>
                         </div>
@@ -195,7 +207,7 @@
                 <p class="apartment-description">Cuatro acogedores apartamentos tipo estudio, perfectos para familias o grupos de amigos.</p>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <video controls preload="none" poster="assets/images/101-poster.jpg" width="480" height="768">
+                        <video controls aria-label="Recorrido en video del Apartamento 101" preload="none" poster="assets/images/101-poster.jpg" width="480" height="768">
                             <source src="assets/images/101.mp4" type="video/mp4">
                             Tu navegador no soporta el elemento de video.
                         </video>
@@ -212,7 +224,7 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <video controls preload="none" poster="assets/images/102-poster.jpg" width="480" height="848">
+                        <video controls aria-label="Recorrido en video del Apartamento 102" preload="none" poster="assets/images/102-poster.jpg" width="480" height="848">
                             <source src="assets/images/102.mp4" type="video/mp4">
                             Tu navegador no soporta el elemento de video.
                         </video>
@@ -229,7 +241,7 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <video controls preload="none" poster="assets/images/103-poster.jpg" width="480" height="848">
+                        <video controls aria-label="Recorrido en video del Apartamento 103" preload="none" poster="assets/images/103-poster.jpg" width="480" height="848">
                             <source src="assets/images/103.mp4" type="video/mp4">
                             Tu navegador no soporta el elemento de video.
                         </video>
@@ -246,7 +258,7 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <video controls preload="none" poster="assets/images/104-poster.jpg" width="480" height="848">
+                        <video controls aria-label="Recorrido en video del Apartamento 104" preload="none" poster="assets/images/104-poster.jpg" width="480" height="848">
                             <source src="assets/images/104.mp4" type="video/mp4">
                             Tu navegador no soporta el elemento de video.
                         </video>
@@ -268,7 +280,7 @@
                 <p class="apartment-description">Dos amplios apartamentos tipo estudio, ideales para grupos grandes o reuniones familiares.</p>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <video controls preload="none" poster="assets/images/201-poster.jpg" width="480" height="848">
+                        <video controls aria-label="Recorrido en video del Apartamento 201" preload="none" poster="assets/images/201-poster.jpg" width="480" height="848">
                             <source src="assets/images/201.mp4" type="video/mp4">
                             Tu navegador no soporta el elemento de video.
                         </video>
@@ -285,7 +297,7 @@
                 </div>
                 <div class="apartment">
                     <div class="media-gallery">
-                        <video controls preload="none" poster="assets/images/202-poster.jpg" width="480" height="768">
+                        <video controls aria-label="Recorrido en video del Apartamento 202" preload="none" poster="assets/images/202-poster.jpg" width="480" height="768">
                             <source src="assets/images/202.mp4" type="video/mp4">
                             Tu navegador no soporta el elemento de video.
                         </video>
@@ -488,25 +500,25 @@
             <h2 id="videos-heading">Videos</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <video controls preload="none" poster="assets/images/entrada-casa-poster.jpg" width="480" height="640">
+                    <video controls aria-label="Video de la entrada de la casa" preload="none" poster="assets/images/entrada-casa-poster.jpg" width="480" height="640">
                         <source src="assets/images/entrada-casa.mp4" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
                 <div class="gallery-item">
-                    <video controls preload="none" poster="assets/images/terraza-2-poster.jpg" width="640" height="350">
+                    <video controls aria-label="Video de la terraza, segunda vista" preload="none" poster="assets/images/terraza-2-poster.jpg" width="640" height="350">
                         <source src="assets/images/terraza-2.mp4" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
                 <div class="gallery-item">
-                    <video controls preload="none" poster="assets/images/terraza-poster.jpg" width="480" height="768">
+                    <video controls aria-label="Video de la terraza" preload="none" poster="assets/images/terraza-poster.jpg" width="480" height="768">
                         <source src="assets/images/terraza.mp4" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
                 <div class="gallery-item">
-                    <video controls preload="none" poster="assets/images/tintinpan-poster.jpg" width="640" height="352">
+                    <video controls aria-label="Video del paseo a Tintipán" preload="none" poster="assets/images/tintinpan-poster.jpg" width="640" height="352">
                         <source src="assets/images/tintinpan.mp4" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>

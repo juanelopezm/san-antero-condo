@@ -44,7 +44,8 @@
 
 /* Reset and Base Styles */
 :root {
-    --primary-color: #0ea5e9; /* Caribbean blue */
+    --primary-color: #0ea5e9; /* Caribbean blue — icons/accents/gradients only */
+    --primary-text: #0369a1; /* PRD-006: darkened for text on light backgrounds — --primary-color is 2.77:1 on white, fails WCAG; this is 5.93:1 */
     --secondary-color: #22c55e; /* Emerald */
     --accent-color: #f59e0b; /* Amber */
     --text-color: #1f2937;
@@ -65,13 +66,25 @@ body {
     color: var(--text-color);
 }
 
+/* PRD-006: explicit, high-contrast focus ring — the default browser outline can
+   get clipped by border-radius on pill buttons or blend into hero photos. Amber
+   reads clearly against both the light sections and the dark/photo hero. */
+:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
 /* Header and Navigation */
 header {
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.8);
+
+    /* PRD-006: 0.92 (was 0.8) so contrast holds regardless of what photo is
+       behind the blur — a translucent bar over a busy background has no fixed
+       contrast ratio, axe measured 1.72:1 against a mid-tone frame at 0.8. */
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -92,7 +105,7 @@ header {
 }
 
 .language-selector a.active {
-    color: var(--primary-color);
+    color: var(--primary-text);
     font-weight: bold;
 }
 
@@ -233,11 +246,30 @@ header {
     display: flex;
     gap: 0.5rem;
     justify-content: center;
+    align-items: flex-end;
     flex-wrap: wrap;
 }
 
+/* PRD-006: real, visible <label>s instead of relying on aria-label alone —
+   a placeholder-only date input gives sighted users no persistent format cue. */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+}
+
+.form-field label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    padding-left: 0.9rem;
+}
+
 .availability-form input[type="date"],
-.availability-form input[type="number"] {
+.availability-form input[type="number"],
+.availability-form select {
     padding: 0.8rem 0.9rem;
     border-radius: 30px;
     border: 1px solid rgba(255, 255, 255, 0.4);
@@ -1146,7 +1178,7 @@ footer p {
 
 .how-to-book h3 {
     margin-bottom: 0.75rem;
-    color: var(--primary-color);
+    color: var(--primary-text);
 }
 
 .how-to-book ul {
@@ -1253,7 +1285,7 @@ footer p {
 }
 
 .faq-item h3 {
-    color: var(--primary-color);
+    color: var(--primary-text);
     margin-bottom: 1rem;
     font-size: 1.2rem;
 }
@@ -1603,4 +1635,17 @@ section h2 {
 #availability-section .cta-button {
     display: inline-block;
     margin-top: 10px;
+}
+
+/* PRD-006: honor prefers-reduced-motion — Swiper autoplay is disabled in JS
+   (scripts.js), this catches every CSS transition/transform site-wide. */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
 } 

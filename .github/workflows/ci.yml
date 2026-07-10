@@ -20,3 +20,27 @@ jobs:
         run: npx --yes html-validate@8 index.html en/index.html 404.html
       - name: CSS lint
         run: npm run lint:css
+
+  # PRD-006: non-blocking for now (informational) — flip to a required check
+  # once this stays green for two weeks. Kept as its own job (not a step in
+  # `verify`) so a slow/flaky browser download never holds up the fast gate.
+  accessibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Serve site
+        run: nohup python3 -m http.server 8080 > /tmp/serve.log 2>&1 &
+      - name: Wait for server
+        run: npx --yes wait-on@8 http://localhost:8080/index.html
+      - name: axe-core scan (/ and /en/)
+        run: >
+          npx --yes @axe-core/cli@4
+          http://localhost:8080/index.html
+          http://localhost:8080/en/index.html
+          --tags wcag2a,wcag2aa,wcag21a,wcag21aa
+          --exit

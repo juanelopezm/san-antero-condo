@@ -11,7 +11,7 @@ priority band unless dependencies force otherwise.
 | [PRD-002](prds/PRD-002-media-performance.md) | Media and performance optimization | P0 | PRD-001 | Done (Lighthouse score unmeasurable in this sandbox — see PRD notes) | |
 | [PRD-005](prds/PRD-005-quality-ci.md) | Quality tooling and CI | P0 | — | Done | |
 | [PRD-003](prds/PRD-003-seo-discoverability.md) | SEO and discoverability | P1 | — | Done | |
-| [PRD-006](prds/PRD-006-accessibility.md) | Accessibility (WCAG 2.1 AA) | P1 | PRD-001 | Not started | |
+| [PRD-006](prds/PRD-006-accessibility.md) | Accessibility (WCAG 2.1 AA) | P1 | PRD-001 | Done | |
 | [PRD-007](prds/PRD-007-analytics.md) | Analytics and conversion measurement | P2 | PRD-004 | Not started | |
 | [PRD-008](prds/PRD-008-content-trust.md) | Content accuracy and trust | P2 | — | Not started | |
 
@@ -38,6 +38,10 @@ in your completion summary.
 - [ ] 2–3 recent attributable guest reviews (PRD-008)
 - [ ] Confirm tour destinations: Islas de San Bernardo / Múcura / Tintipán naming (PRD-008)
 - [ ] Register `sitemap.xml` with Google Search Console / Bing Webmaster Tools once PRD-003 is live — agents can't do this, needs the owner's Google/Microsoft account (PRD-003, done otherwise)
+- [ ] Confirm whether any gallery/apartment video has spoken narration — audio
+      streams exist on a few clips but content wasn't exhaustively checked; if any
+      has speech, that clip needs real captions, not just the descriptive
+      `aria-label` every video now has (PRD-006, done otherwise)
 
 ## Known debt (not blocking, flagged for a future pass)
 

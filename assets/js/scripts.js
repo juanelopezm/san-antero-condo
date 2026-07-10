@@ -32,11 +32,14 @@
 
     function initHeroCarousel() {
         if (typeof Swiper === 'undefined' || !document.querySelector('.swiper-container')) return;
+        // PRD-006: an auto-advancing carousel is exactly what prefers-reduced-motion
+        // asks sites to stop doing. Controls (prev/next/pagination) still work either way.
+        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         // eslint-disable-next-line no-new
         new Swiper('.swiper-container', {
             direction: 'horizontal',
             loop: true,
-            autoplay: { delay: 5000, disableOnInteraction: false },
+            autoplay: reduceMotion ? false : { delay: 5000, disableOnInteraction: false },
             pagination: { el: '.swiper-pagination', clickable: true },
             navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
             on: {
