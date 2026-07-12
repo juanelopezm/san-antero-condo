@@ -49,13 +49,30 @@ in your completion summary.
       has speech, that clip needs real captions, not just the descriptive
       `aria-label` every video now has (PRD-006, done otherwise)
 
-## Known debt (not blocking, flagged for a future pass)
+## Resolved debt
 
-- `assets/css/styles.css` has several genuine duplicate selectors (`body`,
-  `.apartment`, `.gallery-nav`, `.popup-gallery`, others) — `stylelint`'s
-  `no-duplicate-selectors` rule is disabled rather than auto-merged, since
-  collapsing them risks silently changing which declaration wins. (found in PRD-005)
-- The shared `.cta-button` class used *without* `.primary` (8 places across both
-  pages) has no color of its own and falls back to default link-blue — invisible
-  on light backgrounds, visibly broken on dark ones. `404.html` patches around it
-  locally; the underlying shared rule hasn't been audited. (found in PRD-003)
+- ~~`assets/css/styles.css` duplicate selectors~~ — fixed. Investigated all 11
+  flagged by re-enabling `no-duplicate-selectors`: `body` and `.apartment` had
+  no/partial property conflicts, computed the actual cascade-effective values
+  and merged into one rule each, preserving rendered output exactly (verified
+  via `getComputedStyle` before touching anything, since later-wins isn't
+  always obvious from source order). `.pricing-grid` was a genuine collision
+  between the PRD-004 pricing table (new) and a ~70-line dead legacy
+  "pricing cards" component (`.pricing-card`, `.featured-label`, `.amount`,
+  `.period`, confirmed zero HTML references) — renamed the live table to
+  `.pricing-rates-table` and deleted the entire dead block, including its
+  entangled duplicate `.features`/`.features i` rules (merged those into the
+  one real, actually-used `.features` definition, again preserving the
+  cascade-effective computed color). `.gallery-nav`/`.popup-gallery`/etc. were
+  the CSS remnant of the lightbox JS already deleted as dead code in PRD-001 —
+  confirmed zero references anywhere and deleted the ~300-line block outright.
+  `no-duplicate-selectors` is enforced again in `.stylelintrc.json`; visually
+  regression-checked apartment cards, gallery grid, and pricing section
+  screenshots before/after.
+- ~~Bare `.cta-button` (no `.primary`) has no color of its own~~ — fixed. Audited
+  all 8 usages (6 apartment cards, festival CTA, "view route" link) — all on
+  light backgrounds, none actually invisible, but inconsistent with the site's
+  button aesthetic (read as a plain hyperlink). Gave the shared base rule a
+  real secondary/outline treatment using `--primary-text` (the WCAG-checked
+  color from PRD-006). `404.html`'s local dark-page override still wins there
+  via specificity, unchanged.

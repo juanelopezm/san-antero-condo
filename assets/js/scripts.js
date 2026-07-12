@@ -233,7 +233,7 @@
         }).join('');
         const studioHead = locale === 'en' ? 'Studio (101–104)' : 'Apartaestudio (101–104)';
         const aptHead = locale === 'en' ? 'Apartment (201–202)' : 'Apartamento (201–202)';
-        mount.innerHTML = `<table class="pricing-grid"><thead><tr><th scope="col"></th><th scope="col">${studioHead}</th><th scope="col">${aptHead}</th></tr></thead><tbody>${rows}</tbody></table>`;
+        mount.innerHTML = `<table class="pricing-rates-table"><thead><tr><th scope="col"></th><th scope="col">${studioHead}</th><th scope="col">${aptHead}</th></tr></thead><tbody>${rows}</tbody></table>`;
         mount.hidden = false;
     }
 
